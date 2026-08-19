@@ -1,0 +1,244 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #1a1612; /* Deep warm espresso */
+  font-family: 'Barriecito', cursive, sans-serif;
+  color: #d6cfbf; /* Soft warm parchment */
+  line-height: 1.6;
+  padding: 40px 20px;
+}
+
+h1 {
+  font-family: 'Barrio', cursive, sans-serif;
+  color: #3d572a; /* Earthy sage */
+  font-size: 3rem;
+  letter-spacing: 1.5px;
+  margin: 0 0 16px 0;
+  text-align: center;
+}
+
+h3 {
+  font-family: 'Barrio', cursive, sans-serif;
+  color: #b2c9a5;
+  letter-spacing: 0.5px;
+  margin: 8px 0;
+}
+
+p {
+  color: #b5ac98;
+  font-family: 'Barriecito', cursive, sans-serif;
+  font-size: 1.15rem;
+  margin: 6px 0;
+}
+
+h2, h3, p, a {
+  text-decoration: none; /* Removes the underline */
+  color: inherit;        /* Uses the header's original text color */
+}
+
+/* Nav / Header Links */
+.flex-container {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 0 auto 32px auto;
+  max-width: 620px;
+}
+
+.text-block {
+  padding: 6px 14px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.text-block:hover {
+  border-bottom: 2px solid #6b8c59;
+}
+
+.text-block h3 {
+  color: #8da47e;
+  font-size: 1.25rem;
+}
+
+/* Blog-Style Update Cards */
+.update {
+  background: #241f19; /* Warm dark brown card */
+  border: 1px solid #3b3329;
+  border-left: 5px solid #4d6a3f; /* Deep moss accent bar */
+  border-radius: 8px;
+  padding: 24px 28px;
+  width: 100%;
+  max-width: 580px;
+  box-sizing: border-box;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  margin-bottom: 20px;
+}
+
+.update p {
+  font-size: 1rem;
+  color: #8c826e;
+}
+
+/* Earthy Tag Badge */
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  font-size: 0.9rem;
+  font-family: 'Barriecito', cursive, sans-serif;
+  background-color: #2e3b26;
+  color: #a8caa0;
+  border: 1px solid #445939;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+/* Suggestion Box Form */
+.suggestion-box {
+  background: #241f19;
+  border: 1px solid #3b3329;
+  border-radius: 8px;
+  padding: 28px 32px;
+  width: 100%;
+  max-width: 580px;
+  box-sizing: border-box;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  margin-top: 10px;
+}
+
+.suggestion-box h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.6rem;
+  color: #8da47e;
+}
+
+/* Form Controls */
+.form-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: inline-block;
+  color: #c2baa8;
+  font-family: 'Barriecito', cursive, sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 14px;
+  background-color: #17130f;
+  border: 1px solid #42382c;
+  border-radius: 6px;
+  color: #e8e2d5;
+  font-family: 'Barriecito', cursive, sans-serif;
+  font-size: 1.1rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #635746;
+  font-family: 'Barriecito', cursive, sans-serif;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #6b8c59;
+  background-color: #1c1813;
+}
+
+/* Solid Textured Button */
+.submit-btn {
+  display: block;
+  width: 100%;
+  padding: 12px 18px;
+  background-color: #435b37;
+  color: #e4eedb;
+  border: 1px solid #5a7a4a;
+  border-radius: 6px;
+  font-family: 'Barrio', cursive, sans-serif;
+  font-size: 1.25rem;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.submit-btn:hover {
+  background-color: #4f6b41;
+}
+
+.submit-btn:active {
+  transform: translateY(1px);
+}
+
+/* Blog-Style Footer */
+.footer {
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid #3b3329;
+  text-align: center;
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.footer-links a {
+  color: #8da47e;
+  font-family: 'Barrio', cursive, sans-serif;
+  text-decoration: none;
+  font-size: 1.15rem;
+  letter-spacing: 0.5px;
+  transition: color 0.2s ease, border-bottom 0.2s ease;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+}
+
+.footer-links a:hover {
+  color: #b2c9a5;
+  border-bottom-color: #b2c9a5;
+}
+
+.footer-copy {
+  color: #635746;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.header {
+  max-width: 580px;
+  margin: 0 auto 40px auto;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #3b3329;
+  text-align: center;
+}
+
+.header .flex-container {
+  margin: 0 auto;
+}
