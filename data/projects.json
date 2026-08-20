@@ -1,32 +1,36 @@
 [
-  {
-    "id": "pineapple-pizza",
-    "title": "Pineapple on Pizza Paradox",
-    "stage": "mind works",
-    "description": "Investigating the cultural origins, culinary psychology, and internet polarization surrounding fruit on flatbread."
-  },
-  {
-    "id": "food-delivery",
-    "title": "Food Delivery & Loneliness",
-    "stage": "your sticks",
-    "description": "Aggregating anonymous survey data on third-party food apps, neighborhood demographics, and social habits."
-  },
-  {
-    "id": "hotdog-sandwich",
-    "title": "Is a Hotdog a Sandwich?",
-    "stage": "complete",
-    "description": "A multi-variable taxonomy analysis using state legal definitions, cube rule classifications, and survey consensus."
-  },
-  {
-    "id": "color-associations",
-    "title": "Color Psychology vs Reality",
-    "stage": "the gears",
-    "description": "Cross-referencing stated favorite colors against personality metrics and regional upbringing."
-  },
   { 
     "id": "project1",
     "title": "Project1",
     "stage": "your sticks",
-    "description": "Cross-referencing stated favorite colors against personality metrics and regional upbringing."
+    "description": "Cross-referencing stated favorite colors against personality metrics and regional upbringing.",
+    "mind_works": "8/12/2026",
+    "the_gears": "8/20/2026",
+    "your_sticks": "9/20/2026",
+    "fancy_stuff": "10/20/2026",
+    "complete": "11/20/2026"
+
+  },
+    { 
+    "id": "project2",
+    "title": "Project2",
+    "stage": "fancy stuff",
+    "description": "Cross-referencing stated favorite colors against personality metrics and regional upbringing.",
+    "mind_works": "8/12/2026",
+    "the_gears": "8/20/2026",
+    "your_sticks": "9/20/2026",
+    "fancy_stuff": "10/20/2026",
+    "complete": "11/20/2026"
+  },
+      { 
+    "id": "project3",
+    "title": "Project3",
+    "stage": "complete",
+    "description": "Cross-referencing stated favorite colors against personality metrics and regional upbringing.",
+    "mind_works": "8/12/2026",
+    "the_gears": "8/20/2026",
+    "your_sticks": "9/20/2026",
+    "fancy_stuff": "10/20/2026",
+    "complete": "11/20/2026"
   }
 ]

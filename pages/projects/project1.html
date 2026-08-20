@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@400;500;600&family=Barrio&family=Barriecito&display=swap" rel="stylesheet">  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>project1</title>
+  <title>Project 1 — infunibuley</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@400;500;600&family=Barrio&family=Barriecito&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../styles.css">
   <script src="../../scripts/project-tab.js" defer></script>
 </head>
@@ -12,70 +15,92 @@
 <div>
 
   <header class="header">
-    <h1> <a href="https://infunibuley.github.io/">infunibuley</a> </h1>
+    <h1><a href="https://infunibuley.github.io/">infunibuley</a></h1>
     <div class="flex-container">
-      <div class="text-block">
-        <h3> <a href="https://infunibuley.github.io/pages/projects">Projects</a> </h3>
-      </div>
-      <div class="text-block">
-        <h3> <a href="https://infunibuley.github.io/pages/about">About</a> </h3>
-      </div>
-      <div class="text-block">
-        <h3> <a href="https://infunibuley.github.io/pages/surveys">Surveys</a> </h3>
-      </div>
+      <div class="text-block"><h3><a href="https://infunibuley.github.io/pages/projects">Projects</a></h3></div>
+      <div class="text-block"><h3><a href="https://infunibuley.github.io/pages/about">About</a></h3></div>
+      <div class="text-block"><h3><a href="https://infunibuley.github.io/pages/surveys">Surveys</a></h3></div>
     </div>
   </header>
 
   <div class="flex-container">
-    <h2>Project1</h2>
+    <h2>Project 1</h2>
   </div>
 
+  <!-- 5 Static Stage Tabs -->
   <div class="tab-container">
-    <button class="tab-btn active" data-filter="mindworks">1. mind works</button>
-    <button class="tab-btn" data-filter="thegears">2. the gears</button>
-    <button class="tab-btn" data-filter="yoursticks">3. your sticks</button>
+    <button class="tab-btn" data-stage="mind works" data-target="mind-works">1. mind works</button>
+    <button class="tab-btn" data-stage="the gears" data-target="the-gears">2. the gears</button>
+    <button class="tab-btn" data-stage="your sticks" data-target="your-sticks">3. your sticks</button>
+    <button class="tab-btn" data-stage="fancy stuff" data-target="fancy-stuff">4. fancy stuff</button>
+    <button class="tab-btn" data-stage="complete" data-target="complete">5. complete</button>
   </div>
 
-  <div id="mindworks" class="content-container tab-content active">
+  <!-- Stage 1 Panel -->
+  <div id="mind-works" class="content-container tab-content" data-stage-name="mind works">
     <h4>mind works</h4>
-    <p>blah blah blah, planning planning</p>
+    <div class="stage-body">
+      <p>Initial hypothesis formulation, raw brainstorming notes, and research questions.</p>
+    </div>
   </div>
 
-  <div id="thegears" class="content-container tab-content">
+  <!-- Stage 2 Panel -->
+  <div id="the-gears" class="content-container tab-content" data-stage-name="the gears">
     <h4>the gears</h4>
-    <p>blah blah blah, planning planning</p>
+    <div class="stage-body">
+      <p>Building survey structure, creating schema definitions, and preparing forms.</p>
+    </div>
   </div>
 
-  <div id="yoursticks" class="content-container tab-content">
+  <!-- Stage 3 Panel (Survey Action) -->
+  <div id="your-sticks" class="content-container tab-content" data-stage-name="your sticks">
     <h4>your sticks</h4>
-    <p>Share your thoughts. <br>Fill out the survey or share it with someone who has strong opinions :)</p>
+    <div class="stage-body">
+      <p>Share your thoughts. <br>Fill out the survey or share it with someone who has strong opinions :)</p>
 
-    <div class="survey-action-card">
-      <a href="https://infunibuley.github.io/pages/surveys/project1" class="survey-start-btn">
-        Take the Survey
-      </a>
+      <div class="survey-action-card">
+        <a href="https://infunibuley.github.io/pages/surveys/project1" class="survey-start-btn">
+          Take the Survey
+        </a>
 
-      <div class="share-box">
-        <div class="share-link-group">
-          <input 
-            type="text" 
-            id="survey-link-input" 
-            value="https://infunibuley.github.io/pages/surveys/project1" 
-            readonly
-          >
-          <button id="copy-btn" class="copy-btn" onclick="copySurveyLink()">Copy Link</button>
-        </div>
-        <p id="copy-feedback" class="copy-feedback">Copied to clipboard!</p>
+        <div class="share-box">
+          <div class="share-link-group">
+            <input 
+              type="text" 
+              id="survey-link-input" 
+              value="https://infunibuley.github.io/pages/surveys/project1" 
+              readonly
+            >
+            <button id="copy-btn" class="copy-btn" onclick="copySurveyLink()">Copy Link</button>
+          </div>
+          <p id="copy-feedback" class="copy-feedback">Copied to clipboard!</p>
 
-        <div class="qr-container">
-          <img 
-            src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://infunibuley.github.io/pages/surveys/project1&bgcolor=24-1f-19&color=b2-c9-a5" 
-            alt="Survey QR Code" 
-            class="survey-qr"
-          >
-          <span class="qr-caption">Scan to share or take on mobile</span>
+          <div class="qr-container">
+            <img 
+              src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://infunibuley.github.io/pages/surveys/project1&bgcolor=24-1f-19&color=b2-c9-a5" 
+              alt="Survey QR Code" 
+              class="survey-qr"
+            >
+            <span class="qr-caption">Scan to share or take on mobile</span>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Stage 4 Panel -->
+  <div id="fancy-stuff" class="content-container tab-content" data-stage-name="fancy stuff">
+    <h4>fancy stuff</h4>
+    <div class="stage-body">
+      <p>Statistical breakdown, trend identification, and chart visualizations.</p>
+    </div>
+  </div>
+
+  <!-- Stage 5 Panel -->
+  <div id="complete" class="content-container tab-content" data-stage-name="complete">
+    <h4>complete</h4>
+    <div class="stage-body">
+      <p>Final writeup, archive data, and final conclusions.</p>
     </div>
   </div>
 
@@ -89,6 +114,5 @@
   </footer>
 
 </div>
-
 </body>
 </html>

@@ -115,7 +115,6 @@ h2, h3, p, a {
   color: #8c826e;
 }
 
-/* Base Tag Style */
 .tag {
   display: inline-block;
   padding: 3px 10px;
@@ -129,33 +128,33 @@ h2, h3, p, a {
 /* Stage 1: mind works (Drafty / Soft Amber-Brown) */
 .tag-mind-works {
   background-color: #2b2318;
-  color: #d4b58c;
+  color: #b5ac98;
   border: 1px solid #4a3d2c;
 }
 
 /* Stage 2: the gears (Industrial / Muted Slate-Brown) */
 .tag-the-gears {
   background-color: #25282a;
-  color: #9cb8c5;
+  color: #b5ac98;
   border: 1px solid #3d4950;
 }
 
 .tag-your-sticks {
   background-color: #223824;
-  color: #4a8452;
+  color: #b5ac98;
   border: 1px solid #3b663f;
   animation: pulse-border 2s infinite ease-in-out;
 }
 
 .tag-fancy-stuff {
   background-color: #2a2233;
-  color: #c9a7eb;
+  color: #b5ac98;
   border: 1px solid #4b3d5c;
 }
 
 .tag-complete {
   background-color: #3b3329;
-  color: #d6cfbf;
+  color: #b5ac98;
   border: 1px solid #594d3e;
 }
 
@@ -404,7 +403,6 @@ h2, h3, p, a {
   display: block;
 }
 
-/* Survey Card Container */
 .survey-action-card {
   background: #241f19;
   border: 1px solid #3b3329;
@@ -439,7 +437,6 @@ h2, h3, p, a {
   transform: translateY(1px);
 }
 
-/* Share Section */
 .share-box {
   margin-top: 24px;
   padding-top: 20px;
@@ -489,7 +486,6 @@ h2, h3, p, a {
   margin: 6px 0 0 0;
 }
 
-/* QR Code Display */
 .qr-container {
   display: flex;
   flex-direction: column;
@@ -511,4 +507,51 @@ h2, h3, p, a {
   font-family: 'Barriecito', cursive, sans-serif;
   color: #8c826e;
   font-size: 0.95rem;
+}
+
+.stage-status-msg {
+  font-family: 'Advent Pro', sans-serif;
+  font-size: 0.95rem;
+  margin: -8px 0 16px 0;
+}
+
+.stage-status-msg.completed-date {
+  color: #8c826e;
+}
+
+.stage-status-msg.active-date {
+  color: #a8caa0;
+}
+
+/* Future / Locked Stage Container */
+.future-lock-box {
+  background: #1c1813;
+  border: 1px dashed #42382c;
+  border-radius: 8px;
+  padding: 36px 20px;
+  text-align: center;
+  margin-top: 14px;
+}
+
+.lock-icon {
+  font-size: 1.5rem;
+  color: #8da47e;
+  margin: 0 0 8px 0;
+}
+
+.lock-text {
+  font-family: 'Barrio', cursive, sans-serif;
+  font-size: 1.2rem;
+  color: #b2c9a5;
+  margin: 0 0 6px 0;
+}
+
+.lock-subtext {
+  color: #a89f8d;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.lock-subtext strong {
+  color: #d4b58c;
 }

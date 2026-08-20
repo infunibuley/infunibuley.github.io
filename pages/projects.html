@@ -9,30 +9,30 @@
 </head>
 
 <body>
-<div>
+  <div>
 
-  <header class="header">
-    <h1> <a href="https://infunibuley.github.io/">infunibuley</a> </h1>
-    <div class="flex-container">
-      <div class="text-block">
-        <h3> <a href="https://infunibuley.github.io/pages/projects">Projects</a> </h3>
+    <header class="header">
+      <h1> <a href="https://infunibuley.github.io/">infunibuley</a> </h1>
+      <div class="flex-container">
+        <div class="text-block">
+          <h3> <a href="https://infunibuley.github.io/pages/projects">Projects</a> </h3>
+        </div>
+        <div class="text-block">
+          <h3> <a href="https://infunibuley.github.io/pages/about">About</a> </h3>
+        </div>
+        <div class="text-block">
+          <h3> <a href="https://infunibuley.github.io/pages/surveys">Surveys</a> </h3>
+        </div>
       </div>
-      <div class="text-block">
-        <h3> <a href="https://infunibuley.github.io/pages/about">About</a> </h3>
-      </div>
-      <div class="text-block">
-        <h3> <a href="https://infunibuley.github.io/pages/surveys">Surveys</a> </h3>
-      </div>
+    </header>
+
+    <div class="tab-container">
+      <button class="tab-btn active" data-filter="all">All</button>
+      <button class="tab-btn" data-filter="in-progress">In Progress</button>
+      <button class="tab-btn" data-filter="complete">Complete</button>
     </div>
-  </header>
 
-  <div class="tab-container">
-    <button class="tab-btn active" data-filter="all">All</button>
-    <button class="tab-btn" data-filter="in-progress">In Progress</button>
-    <button class="tab-btn" data-filter="complete">Complete</button>
-  </div>
-
-  <div id="projects-container" class="projects-grid"></div>
+    <div id="projects-container" class="projects-grid"></div>
 
   </div>
 

@@ -1,5 +1,6 @@
 let allProjects = [];
 
+// Stage order mapping (Stage 1 -> Stage 5)
 const STAGE_ORDER = {
   "mind works": 1,
   "the gears": 2,
@@ -15,17 +16,19 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then((data) => {
+      // Sort projects by stage order
       allProjects = sortProjectsByStage(data);
-      renderProjects(allProjects);
+      renderSurveys(allProjects);
     })
     .catch((error) => {
       console.error("Error loading project data:", error);
       const container = document.getElementById("projects-container");
       if (container) {
-        container.innerHTML = "<p>Failed to load projects. Please try again later.</p>";
+        container.innerHTML = "<p>Failed to load surveys. Please try again later.</p>";
       }
     });
 
+  // Setup tab filter listeners for 'all', 'open', and 'closed'
   const tabs = document.querySelectorAll(".tab-btn");
   tabs.forEach((tab) => {
     tab.addEventListener("click", (e) => {
@@ -35,18 +38,20 @@ document.addEventListener("DOMContentLoaded", () => {
       const filter = e.target.getAttribute("data-filter").toLowerCase();
 
       if (filter === "all") {
-        renderProjects(allProjects);
+        renderSurveys(allProjects);
       } else {
         const filtered = allProjects.filter((p) => {
-          const projectStatus = p.stage === "complete" ? "complete" : "in-progress";
-          return projectStatus === filter;
+          const isOpen = p.stage && p.stage.toLowerCase().trim() === "your sticks";
+          const surveyStatus = isOpen ? "open" : "closed";
+          return surveyStatus === filter;
         });
-        renderProjects(filtered);
+        renderSurveys(filtered);
       }
     });
   });
 });
 
+// Helper function to sort projects from Stage 1 -> Stage 5
 function sortProjectsByStage(projects) {
   return [...projects].sort((a, b) => {
     const orderA = STAGE_ORDER[a.stage ? a.stage.toLowerCase().trim() : ""] || 99;
@@ -55,6 +60,7 @@ function sortProjectsByStage(projects) {
   });
 }
 
+// Map stage names to CSS tag classes
 function getStageClass(stage) {
   switch (stage ? stage.toLowerCase().trim() : "") {
     case "mind works":
@@ -72,38 +78,33 @@ function getStageClass(stage) {
   }
 }
 
-function getStageDate(project) {
-  if (!project.stage) return "TBD";
-  
-  const stageKey = project.stage.toLowerCase().trim().replace(/\s+/g, "_");
-  return project[stageKey] || "TBD";
-}
-
 // Render cards into DOM
-function renderProjects(projects) {
+function renderSurveys(projects) {
   const container = document.getElementById("projects-container");
   if (!container) return;
 
   if (projects.length === 0) {
-    container.innerHTML = "<p style='text-align: center; color: #8c826e; margin-top: 20px;'>No projects found in this category.</p>";
+    container.innerHTML = "<p style='text-align: center; color: #8c826e; margin-top: 20px;'>No surveys found in this category.</p>";
     return;
   }
 
   container.innerHTML = projects
     .map((project) => {
       const stageClass = getStageClass(project.stage);
-      const projectUrl = `https://infunibuley.github.io/pages/projects/${project.id}`;
-      const status = project.stage === "complete" ? "complete" : "in-progress";
+      const projectUrl = `https://infunibuley.github.io/pages/surveys/${project.id}`;
+      const isOpen = (project.stage && project.stage.toLowerCase().trim() === "your sticks");
+      const surveyStatus = isOpen ? "open" : "closed";
       
-      const lastUpdateDate = getStageDate(project);
+      const closeDate = project.fancy_stuff || "TBD";
+      const dateLabel = isOpen ? `Closes on ${closeDate}` : `Closed on ${closeDate}`;
 
       return `
-        <div class="update project-card" data-status="${status}">
+        <div class="update project-card" data-status="${surveyStatus}">
           <span class="tag ${stageClass}">Stage: ${project.stage}</span>
           <h3><a href="${projectUrl}" class="project-title-link">${project.title}</a></h3>
           <div class="flex-container">
             <p>${project.description}</p>
-            <p style="color: #8c826e; font-size: 0.9rem;">Updated on ${lastUpdateDate}</p>
+            <p style="color: ${isOpen ? '#a3e8b5' : '#8c826e'}; font-size: 0.9rem;">${dateLabel}</p>
           </div>
         </div>
       `;
