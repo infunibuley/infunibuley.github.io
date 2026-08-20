@@ -104,7 +104,7 @@ h2, h3, p, a {
   border-left: 5px solid #4d6a3f; 
   border-radius: 8px;
   padding: 24px 28px;
-  width: 100%;
+  width: 50%;
   max-width: 580px;
   box-sizing: border-box;
   text-align: left;
@@ -115,6 +115,10 @@ h2, h3, p, a {
 .update p {
   font-size: 1rem;
   color: #8c826e;
+}
+
+.flex-container .update {
+  width: calc(50% - 8px);
 }
 
 .tag {
