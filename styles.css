@@ -74,10 +74,12 @@ h2, h3, p, a {
 
 .flex-container {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   justify-content: center;
+  flex-wrap: wrap;
   margin: 0 auto 32px auto;
   max-width: 620px;
+  padding: 0 10px;
 }
 
 .text-block {
@@ -331,10 +333,19 @@ h2, h3, p, a {
 
 .tab-container {
   display: flex;
-  justify-content: center;
-  gap: 12px;
-  max-width: 400px;
+  justify-content: flex-start; 
+  gap: 8px;
+  max-width: 100%;
   margin: 0 auto 36px auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; 
+  padding: 4px 10px;
+  box-sizing: border-box;
+}
+
+.tab-container::-webkit-scrollbar {
+  display: none; 
 }
 
 .tab-btn {
@@ -343,13 +354,20 @@ h2, h3, p, a {
   color: #8da47e;
   font-family: 'Barrio', cursive, sans-serif;
   font-size: 1.15rem;
-  padding: 8px 18px;
+  padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
   letter-spacing: 0.5px;
   transition: all 0.2s ease;
+  flex-shrink: 0;
+  white-space: nowrap; 
 }
 
+@media (min-width: 600px) {
+  .tab-container {
+    justify-content: center;
+  }
+}
 .tab-btn:hover {
   background-color: #241f19;
   color: #b2c9a5;
