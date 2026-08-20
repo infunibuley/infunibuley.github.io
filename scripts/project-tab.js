@@ -4,15 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   tabButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      // 1. Remove active state from all buttons
       tabButtons.forEach((b) => b.classList.remove("active"));
-      // 2. Add active state to clicked button
       btn.classList.add("active");
 
-      // 3. Hide all content panels
       tabContents.forEach((content) => content.classList.remove("active"));
 
-      // 4. Show target section matching data-filter ID
       const targetId = btn.getAttribute("data-filter");
       const targetContent = document.getElementById(targetId);
       if (targetContent) {
@@ -21,3 +17,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+function copySurveyLink() {
+  const linkInput = document.getElementById("survey-link-input");
+  const feedback = document.getElementById("copy-feedback");
+
+  if (!linkInput) return;
+
+  // Copy to clipboard
+  navigator.clipboard.writeText(linkInput.value).then(() => {
+    if (feedback) {
+      feedback.style.display = "block";
+      setTimeout(() => {
+        feedback.style.display = "none";
+      }, 2500);
+    }
+  }).catch((err) => {
+    console.error("Failed to copy link: ", err);
+  });
+}

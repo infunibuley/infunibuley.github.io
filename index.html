@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>infunibuley</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="scripts/forms.js" defer></script>
 </head>
 
 <body>
@@ -28,29 +29,25 @@
   <div class="flex-container">
     <div class="update">
       <p>Latest Update</p>
-      <h3>Pseudo Project</h3>
+      <h3> <a href="https://infunibuley.github.io/pages/projects/project1">project1</a> </h3>
       <span class="tag">Stage: mind works</span>
     </div>
 
     <div class="update">
       <p>Latest Survey</p>
-      <h3>Pseudo Survey</h3>
+      <h3> <a href="https://infunibuley.github.io/pages/surveys/project1">project1</a> </h3>
       <span class="tag">Stage: mind works</span>
     </div> 
   </div>
-    
+
   <div class="flex-container">
-    <form action="https://api.web3forms.com/submit" method="POST" class="suggestion-box">
-      <input type="hidden" name="access_key" value="f81b78bd-c568-4c0d-9311-ae6be4d0b9ed">
-      <input type="hidden" name="subject" value="New Thought / Suggestion for infunibuley">
-
-      <input type="checkbox" name="botcheck" style="display: none;">
-
+    <form data-survey-form class="suggestion-box">
+      <input type="hidden" name="sheet_name" value="suggestions">
       <h3>Suggestions</h3>
       <h3>let me borrow your mind</h3>
 
       <div class="form-group">
-        <label for="alias">Alias:</label>
+        <label for="alias">Alias*:</label>
         <input type="text" id="alias" name="alias" required placeholder="who am I crediting for this">
       </div>
 
@@ -82,6 +79,7 @@
       <input type="hidden" name="redirect" value="https://infunibuley.github.io/">
 
       <button type="submit" class="submit-btn">Submit</button>
+      <p class="form-status" style="display: none; text-align: center; margin-top: 10px;"></p>
     </form>
   </div>
 

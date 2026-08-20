@@ -403,3 +403,112 @@ h2, h3, p, a {
 .tab-content.active {
   display: block;
 }
+
+/* Survey Card Container */
+.survey-action-card {
+  background: #241f19;
+  border: 1px solid #3b3329;
+  border-radius: 8px;
+  padding: 24px;
+  margin-top: 18px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Primary "Take Survey" Call-To-Action Button */
+.survey-start-btn {
+  display: inline-block;
+  background-color: #435b37;
+  color: #e4eedb;
+  font-family: 'Barrio', cursive, sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: 0.5px;
+  padding: 12px 28px;
+  border-radius: 6px;
+  border: 1px solid #5a7a4a;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.survey-start-btn:hover {
+  background-color: #4f6b41;
+  transform: translateY(-2px);
+}
+
+.survey-start-btn:active {
+  transform: translateY(1px);
+}
+
+/* Share Section */
+.share-box {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px dashed #3b3329;
+}
+
+.share-link-group {
+  display: flex;
+  gap: 8px;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.share-link-group input {
+  flex: 1;
+  background-color: #17130f;
+  border: 1px solid #42382c;
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: #a8caa0;
+  font-family: 'Advent Pro', sans-serif;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.copy-btn {
+  background-color: #2e3b26;
+  border: 1px solid #445939;
+  color: #a8caa0;
+  font-family: 'Barriecito', cursive, sans-serif;
+  font-size: 1.05rem;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.copy-btn:hover {
+  background-color: #3e4f34;
+  color: #d6eed0;
+}
+
+.copy-feedback {
+  display: none;
+  color: #a3e8b5;
+  font-size: 0.9rem;
+  margin: 6px 0 0 0;
+}
+
+/* QR Code Display */
+.qr-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.survey-qr {
+  width: 120px;
+  height: 120px;
+  border-radius: 6px;
+  border: 1px solid #3b3329;
+  padding: 6px;
+  background-color: #17130f;
+}
+
+.qr-caption {
+  font-family: 'Barriecito', cursive, sans-serif;
+  color: #8c826e;
+  font-size: 0.95rem;
+}

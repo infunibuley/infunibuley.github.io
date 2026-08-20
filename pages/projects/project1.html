@@ -36,7 +36,6 @@
     <button class="tab-btn" data-filter="yoursticks">3. your sticks</button>
   </div>
 
-  <!-- Panels: Only 'active' panel is visible -->
   <div id="mindworks" class="content-container tab-content active">
     <h4>mind works</h4>
     <p>blah blah blah, planning planning</p>
@@ -49,7 +48,35 @@
 
   <div id="yoursticks" class="content-container tab-content">
     <h4>your sticks</h4>
-    <p>button to go to form, link to share form, yada yada</p>
+    <p>Share your thoughts. <br>Fill out the survey or share it with someone who has strong opinions :)</p>
+
+    <div class="survey-action-card">
+      <a href="https://infunibuley.github.io/pages/surveys/project1" class="survey-start-btn">
+        Take the Survey
+      </a>
+
+      <div class="share-box">
+        <div class="share-link-group">
+          <input 
+            type="text" 
+            id="survey-link-input" 
+            value="https://infunibuley.github.io/pages/surveys/project1" 
+            readonly
+          >
+          <button id="copy-btn" class="copy-btn" onclick="copySurveyLink()">Copy Link</button>
+        </div>
+        <p id="copy-feedback" class="copy-feedback">Copied to clipboard!</p>
+
+        <div class="qr-container">
+          <img 
+            src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://infunibuley.github.io/pages/surveys/project1&bgcolor=24-1f-19&color=b2-c9-a5" 
+            alt="Survey QR Code" 
+            class="survey-qr"
+          >
+          <span class="qr-caption">Scan to share or take on mobile</span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <footer class="footer">
