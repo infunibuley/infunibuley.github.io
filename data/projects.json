@@ -1,0 +1,32 @@
+[
+  {
+    "id": "pineapple-pizza",
+    "title": "Pineapple on Pizza Paradox",
+    "stage": "mind works",
+    "description": "Investigating the cultural origins, culinary psychology, and internet polarization surrounding fruit on flatbread."
+  },
+  {
+    "id": "food-delivery",
+    "title": "Food Delivery & Loneliness",
+    "stage": "your sticks",
+    "description": "Aggregating anonymous survey data on third-party food apps, neighborhood demographics, and social habits."
+  },
+  {
+    "id": "hotdog-sandwich",
+    "title": "Is a Hotdog a Sandwich?",
+    "stage": "complete",
+    "description": "A multi-variable taxonomy analysis using state legal definitions, cube rule classifications, and survey consensus."
+  },
+  {
+    "id": "color-associations",
+    "title": "Color Psychology vs Reality",
+    "stage": "the gears",
+    "description": "Cross-referencing stated favorite colors against personality metrics and regional upbringing."
+  },
+  { 
+    "id": "project1",
+    "title": "Project1",
+    "stage": "your sticks",
+    "description": "Cross-referencing stated favorite colors against personality metrics and regional upbringing."
+  }
+]

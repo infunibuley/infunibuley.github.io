@@ -4,20 +4,28 @@ html, body {
 }
 
 body {
-  background-color: #1a1612; /* Deep warm espresso */
+  background-color: #1a1612; 
   font-family: 'Barriecito', cursive, sans-serif;
-  color: #d6cfbf; /* Soft warm parchment */
+  color: #d6cfbf;
   line-height: 1.6;
   padding: 40px 20px;
 }
 
 h1 {
   font-family: 'Barrio', cursive, sans-serif;
-  color: #3d572a; /* Earthy sage */
+  color: #3d572a;
   font-size: 3rem;
   letter-spacing: 1.5px;
   margin: 0 0 16px 0;
   text-align: center;
+}
+
+h2 {
+  font-family: 'Barrio', cursive, sans-serif;
+  color: #b2c9a5;
+  font-size: 2rem;
+  letter-spacing: 0.5px;
+  margin: 8px 0;
 }
 
 h3 {
@@ -27,19 +35,43 @@ h3 {
   margin: 8px 0;
 }
 
+h4 {
+  font-family: 'Barrio', cursive, sans-serif;
+  color: #b2c9a5;
+  letter-spacing: 0.5px;
+  margin: 8px 0;
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-family: 'Barrio', cursive, sans-serif;
+  color: #647859;
+  letter-spacing: 0.5px;
+  margin: 16px 0;
+  font-size: 1.2rem;
+}
+
+h6 {
+  font-family: 'Barrio', cursive, sans-serif;
+  color: #3e5233;
+  letter-spacing: 0.5px;
+  margin: 16px 0;
+  font-size: 1rem;
+
+}
+
 p {
   color: #b5ac98;
-  font-family: 'Barriecito', cursive, sans-serif;
+  font-family: 'Advent Pro', cursive, sans-serif;
   font-size: 1.15rem;
   margin: 6px 0;
 }
 
 h2, h3, p, a {
-  text-decoration: none; /* Removes the underline */
-  color: inherit;        /* Uses the header's original text color */
+  text-decoration: none;
+  color: inherit; 
 }
 
-/* Nav / Header Links */
 .flex-container {
   display: flex;
   gap: 16px;
@@ -64,11 +96,10 @@ h2, h3, p, a {
   font-size: 1.25rem;
 }
 
-/* Blog-Style Update Cards */
 .update {
-  background: #241f19; /* Warm dark brown card */
+  background: #241f19;
   border: 1px solid #3b3329;
-  border-left: 5px solid #4d6a3f; /* Deep moss accent bar */
+  border-left: 5px solid #4d6a3f; 
   border-radius: 8px;
   padding: 24px 28px;
   width: 100%;
@@ -84,20 +115,55 @@ h2, h3, p, a {
   color: #8c826e;
 }
 
-/* Earthy Tag Badge */
+/* Base Tag Style */
 .tag {
   display: inline-block;
   padding: 3px 10px;
   font-size: 0.9rem;
   font-family: 'Barriecito', cursive, sans-serif;
-  background-color: #2e3b26;
-  color: #a8caa0;
-  border: 1px solid #445939;
   border-radius: 4px;
   margin-top: 10px;
+  letter-spacing: 0.5px;
 }
 
-/* Suggestion Box Form */
+/* Stage 1: mind works (Drafty / Soft Amber-Brown) */
+.tag-mind-works {
+  background-color: #2b2318;
+  color: #d4b58c;
+  border: 1px solid #4a3d2c;
+}
+
+/* Stage 2: the gears (Industrial / Muted Slate-Brown) */
+.tag-the-gears {
+  background-color: #25282a;
+  color: #9cb8c5;
+  border: 1px solid #3d4950;
+}
+
+.tag-your-sticks {
+  background-color: #223824;
+  color: #4a8452;
+  border: 1px solid #3b663f;
+  animation: pulse-border 2s infinite ease-in-out;
+}
+
+.tag-fancy-stuff {
+  background-color: #2a2233;
+  color: #c9a7eb;
+  border: 1px solid #4b3d5c;
+}
+
+.tag-complete {
+  background-color: #3b3329;
+  color: #d6cfbf;
+  border: 1px solid #594d3e;
+}
+
+@keyframes pulse-border {
+  0%, 100% { border-color: #3b663f; }
+  50% { border-color: #62aa69; }
+}
+
 .suggestion-box {
   background: #241f19;
   border: 1px solid #3b3329;
@@ -119,7 +185,6 @@ h2, h3, p, a {
   color: #8da47e;
 }
 
-/* Form Controls */
 .form-group {
   display: flex;
   align-items: center;
@@ -144,8 +209,8 @@ h2, h3, p, a {
   border: 1px solid #42382c;
   border-radius: 6px;
   color: #e8e2d5;
-  font-family: 'Barriecito', cursive, sans-serif;
-  font-size: 1.1rem;
+  font-family: 'Advent Pro', cursive, sans-serif;
+  font-size: 1rem;
   outline: none;
   transition: border-color 0.2s ease;
 }
@@ -153,7 +218,8 @@ h2, h3, p, a {
 .form-group input::placeholder,
 .form-group textarea::placeholder {
   color: #635746;
-  font-family: 'Barriecito', cursive, sans-serif;
+  font-family: 'Advent Pro', cursive, sans-serif;
+  font-size: 1rem;
 }
 
 .form-group textarea {
@@ -166,7 +232,6 @@ h2, h3, p, a {
   background-color: #1c1813;
 }
 
-/* Solid Textured Button */
 .submit-btn {
   display: block;
   width: 100%;
@@ -190,7 +255,6 @@ h2, h3, p, a {
   transform: translateY(1px);
 }
 
-/* Blog-Style Footer */
 .footer {
   margin-top: 60px;
   padding-top: 24px;
@@ -241,4 +305,101 @@ h2, h3, p, a {
 
 .header .flex-container {
   margin: 0 auto;
+}
+
+.content-container {
+  max-width: 580px;
+  margin: 0 auto 40px auto;
+  text-align: left;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.content-container h2 {
+  font-family: 'Barrio', cursive, sans-serif;
+  color: #8da47e;
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+.content-container p {
+  color: #d6cfbf;
+  font-family: 'Advent Pro', cursive, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin: 8px 0;
+}
+
+.tab-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  max-width: 400px;
+  margin: 0 auto 36px auto;
+}
+
+.tab-btn {
+  background-color: transparent;
+  border: 1px solid #3b3329;
+  color: #8da47e;
+  font-family: 'Barrio', cursive, sans-serif;
+  font-size: 1.15rem;
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  background-color: #241f19;
+  color: #b2c9a5;
+  border-color: #6b8c59;
+}
+
+.tab-btn.active {
+  background-color: #435b37;
+  color: #e4eedb;
+  border-color: #5a7a4a;
+}
+
+.projects-grid {
+  max-width: 580px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.project-card {
+  margin: 0;
+  transition: transform 0.15s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+}
+
+.tag-complete {
+  background-color: #3b3329;
+  color: #d6cfbf;
+  border-color: #594d3e;
+}
+
+.project-title-link {
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.project-title-link:hover {
+  color: #d6eed0;
+  text-decoration: underline;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
 }

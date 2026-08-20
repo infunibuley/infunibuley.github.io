@@ -3,9 +3,9 @@
 <head>
   <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@400;500;600&family=Barrio&family=Barriecito&display=swap" rel="stylesheet">  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>infunibuley: projects</title>
-  <link rel="stylesheet" href="../styles.css">
-  <script src="../scripts/projects.js" defer></script>
+  <title>project1</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <script src="../../scripts/project-tab.js" defer></script>
 </head>
 
 <body>
@@ -26,14 +26,30 @@
     </div>
   </header>
 
-  <div class="tab-container">
-    <button class="tab-btn active" data-filter="all">All</button>
-    <button class="tab-btn" data-filter="in-progress">In Progress</button>
-    <button class="tab-btn" data-filter="complete">Complete</button>
+  <div class="flex-container">
+    <h2>Project1</h2>
   </div>
 
-  <div id="projects-container" class="projects-grid"></div>
+  <div class="tab-container">
+    <button class="tab-btn active" data-filter="mindworks">1. mind works</button>
+    <button class="tab-btn" data-filter="thegears">2. the gears</button>
+    <button class="tab-btn" data-filter="yoursticks">3. your sticks</button>
+  </div>
 
+  <!-- Panels: Only 'active' panel is visible -->
+  <div id="mindworks" class="content-container tab-content active">
+    <h4>mind works</h4>
+    <p>blah blah blah, planning planning</p>
+  </div>
+
+  <div id="thegears" class="content-container tab-content">
+    <h4>the gears</h4>
+    <p>blah blah blah, planning planning</p>
+  </div>
+
+  <div id="yoursticks" class="content-container tab-content">
+    <h4>your sticks</h4>
+    <p>button to go to form, link to share form, yada yada</p>
   </div>
 
   <footer class="footer">
