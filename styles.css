@@ -99,17 +99,27 @@ h2, h3, p, a {
 }
 
 .update {
-  background: #241f19;
-  border: 1px solid #3b3329;
-  border-left: 5px solid #4d6a3f; 
   border-radius: 8px;
   padding: 24px 28px;
   width: 100%;
   max-width: 580px;
   box-sizing: border-box;
   text-align: left;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   margin-bottom: 20px;
+}
+
+.update.survey-update {
+  background: #24331d;
+  border: 1px solid #27381e;
+  border-left: 5px solid #44683c; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.update.project-update {
+  background: #302921;
+  border: 1px solid #4a3828;
+  border-left: 5px solid rgb(114, 88, 65); 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 .update p {
