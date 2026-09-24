@@ -73,31 +73,43 @@ async function renderSurveys(projects) {
     return;
   }
 
-  // 1. Check if the project folder actually contains the survey HTML file
+  // 1. Check if the project actually has an active or past survey
   const surveyChecks = await Promise.all(
     projects.map(async (project) => {
+      const stageNum = Number(project.stage) || 1;
+
+      // RULE 1: If it's Stage 1 or 2, it NEVER has a survey yet. No need to fetch.
+      if (stageNum < 3) {
+        return { project, hasSurvey: false };
+      }
+
       const questionUrl = `../data/projects/${project.id}/${project.id}.html`;
       
       try {
         const res = await fetch(questionUrl, { cache: "no-cache" });
 
-        // If GitHub Pages returns 404 (or anything other than 200 OK), the file does not exist
         if (!res.ok) {
           return { project, hasSurvey: false };
         }
 
-        // Catch cases where GitHub Pages serves a 404.html template with status 200
         const text = await res.text();
-        const is404 = text.includes("404") || text.includes("File not found") || text.trim() === "";
 
-        return { project, hasSurvey: !is404 };
+        // RULE 2: If GitHub Pages redirected to index.html or 404, it starts with <!DOCTYPE
+        if (text.trim().toLowerCase().startsWith("<!doctype")) {
+          return { project, hasSurvey: false };
+        }
+
+        // RULE 3: A valid survey snippet must contain form fields
+        const hasFormFields = text.includes("<input") || text.includes("<textarea") || text.includes("form-group");
+
+        return { project, hasSurvey: hasFormFields };
       } catch (err) {
         return { project, hasSurvey: false };
       }
     })
   );
 
-  // 2. Render only projects whose survey files genuinely exist
+  // 2. Render only projects whose survey files genuinely exist and belong to stage >= 3
   const cardsHtml = surveyChecks
     .filter(({ hasSurvey }) => hasSurvey)
     .map(({ project }) => {
@@ -106,19 +118,8 @@ async function renderSurveys(projects) {
       const stageLabel = getStageLabel(stageNum);
       const projectUrl = `https://infunibuley.github.io/pages/survey.html?id=${project.id}`;
 
-      let isOpen = false;
-      let surveyStatus = "na";
-      switch (stageNum) {
-        case 3:
-          surveyStatus = "open";
-          isOpen = true;
-          break;
-        case 4:
-        case 5:
-          surveyStatus = "closed";
-          isOpen = false;
-          break;
-      }
+      let isOpen = stageNum === 3;
+      let surveyStatus = isOpen ? "open" : "closed";
 
       const closeDate = project.cranking_the_dials || project.fancy_stuff || "TBD";
       const dateLabel = isOpen ? `Closes on ${closeDate}` : `Closed on ${closeDate}`;
