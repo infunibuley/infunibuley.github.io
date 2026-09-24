@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function loadProjectQuestions(projectId) {
   // Folder convention: data/projects/{id}/{id}-survey.html
-  const questionUrl = `../data/projects/${projectId}/${projectId}-survey.html`;
+  const questionUrl = `../data/projects/${projectId}/${projectId}.html`;
 
   fetch(questionUrl)
     .then((res) => {
