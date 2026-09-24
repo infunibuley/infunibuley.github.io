@@ -5,15 +5,23 @@ nsduh-eda
 An Exploratory Data Analysis on national mental health and substance use data looking at differences in culture and groups. 
 
 ## 1. Napkin Blueprints
-Mental Health Data: there's the idea that different races have different mental health attention. (I'm asian, I can attest to at least the feeling)
 
-What is the difference in diagnosed/recieving help to needs help ratio between different races/incomes/genders/sexes/age and whatever
+Mental Health Data: there's the idea that different cultures have different mental health stigmas. (I'm asian, I can attest to at least the feeling)
 
-How much is the sample size of lgbtqia+ respondents? If it's large enough, how do sexually queer and gender queer people differ in mental health? How drastic is the difference in mental health concerns between queer people and cis-het people? Are queer people more likely to get mental health help? 
+What's the gap between needing help vs. actually receiving it across different races/incomes/genders/age brackets?
 
-Are younger people more likely to get mental health counseling? Are younger or older people more likely to abuse substances? 
+Disparities in marginalized communities:
+- What is the sample size for different respondent groups in that year's dataset?
+- If sample sizes allow, what do the numbers say about the unique mental health hurdles sexual and gender minority groups face compared to general population baselines? 
+- Are queer people able to access affirming mental health support at the same rate, or are there massive barriers in treatment? What about different cultures? Genders (mostly looking at men)? 
+- Stigma check: how much does community support vs. isolation impact these metrics?
 
-Is there a correlation between anything and substance use and abuse? 
+Age & Substance use:
+- Are younger people more proactive about getting therapy? Are older? Is there an age group that is at all? 
+- Generational differences in substance use vs. abuse patterns?
+- Correlations between socio-economic stressors and coping mechanisms?
+
+Will probably make different groupings based on multiple demographic aspects. 
 
 idk this is a fun dataset
 
@@ -21,7 +29,7 @@ idk this is a fun dataset
 N/A
 
 ## 3. Calling All Echoes
-N/A
+There is no Survey for this Project
 
 ## 4. Cranking the Dials
 N/A

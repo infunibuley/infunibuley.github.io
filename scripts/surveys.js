@@ -64,8 +64,7 @@ function getStageLabel(stage) {
   return config ? config.label : `Stage ${stage}`;
 }
 
-// Render cards into DOM
-function renderSurveys(projects) {
+async function renderSurveys(projects) {
   const container = document.getElementById("projects-container");
   if (!container) return;
 
@@ -74,23 +73,51 @@ function renderSurveys(projects) {
     return;
   }
 
-  container.innerHTML = projects
-    .map((project) => {
+  // 1. Check survey existence for all projects concurrently
+  const surveyChecks = await Promise.all(
+    projects.map(async (project) => {
+      const questionUrl = `../data/projects/${project.id}/${project.id}.html`;
+      try {
+        // Use HEAD method to check existence without downloading full file contents
+        const res = await fetch(questionUrl, { method: "HEAD" });
+        return { project, hasSurvey: res.ok };
+      } catch (err) {
+        return { project, hasSurvey: false };
+      }
+    })
+  );
+
+  // 2. Render cards based on the check result
+  const cardsHtml = surveyChecks
+    .map(({ project, hasSurvey }) => {
+      if (!hasSurvey) {
+        return ""; // or return an alternate card/message if desired
+      }
+
       const stageNum = Number(project.stage);
       const stageClass = getStageClass(stageNum);
       const stageLabel = getStageLabel(stageNum);
-      
-      // Point to layout template with ?id=
-      const projectUrl = `https://infunibuley.github.io/pages/survey.html?id=${project.id}`;
-      
-      // Stage 3 is open; closing date is based on stage 4 deadline (cranking_the_dials)
-      const isOpen = stageNum === 3;
-      const surveyStatus = isOpen ? "open" : "closed";
+      const projectUrl = `https://infunibuley.github.io/pages/survey?id=${project.id}`;
+
+      let isOpen = false;
+      let surveyStatus = "na";
+      switch (stageNum) {
+        case 3:
+          surveyStatus = "open";
+          isOpen = true;
+          break;
+        case 4:
+        case 5:
+          surveyStatus = "closed";
+          isOpen = false;
+          break;
+      }
+
       const closeDate = project.cranking_the_dials || project.fancy_stuff || "TBD";
       const dateLabel = isOpen ? `Closes on ${closeDate}` : `Closed on ${closeDate}`;
 
       return `
-        <div class="update project-card" data-status="${surveyStatus}">
+        <div class="update project-update" data-status="${surveyStatus}">
           <span class="tag ${stageClass}">${stageLabel}</span>
           <h3><a href="${projectUrl}" class="project-title-link">${project.title}</a></h3>
           <div class="flex-container">
@@ -101,4 +128,6 @@ function renderSurveys(projects) {
       `;
     })
     .join("");
+
+  container.innerHTML = cardsHtml || "<p style='text-align: center; color: #8c826e; margin-top: 20px;'>No surveys found at this time.</p>";
 }

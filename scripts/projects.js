@@ -112,7 +112,7 @@ function renderProjects(projects) {
       const stageNum = Number(project.stage);
       const stageClass = getStageClass(stageNum);
       const stageLabel = getStageLabel(stageNum);
-      const projectUrl = `https://infunibuley.github.io/pages/project/?id=${project.id}`;
+      const projectUrl = `https://infunibuley.github.io/pages/project?id=${project.id}`;
       const status = stageNum === 5 ? "complete" : "in-progress";
       const lastUpdateDate = getStageDate(project);
 

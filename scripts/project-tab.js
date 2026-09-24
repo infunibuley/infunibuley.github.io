@@ -89,11 +89,11 @@ function parseAndPopulateMarkdown(markdown, projectId) {
   // 2. Dynamic link to the specific project folder in the GitHub repo
   const folderLink = document.getElementById("project-folder-link");
   if (folderLink) {
-    folderLink.href = `${GITHUB_TREE}/data/projects/${projectId}`;
+    folderLink.href = `${GITHUB_TREE}/data/projects/${projectId}/${projectId}.md`;
   }
 
   // 3. Setup Stage 3 dynamic survey components
-  const surveyUrl = `https://infunibuley.github.io/pages/surveys/${projectId}`;
+  const surveyUrl = `https://infunibuley.github.io/pages/survey?id=${projectId}`;
   const surveyActionLink = document.getElementById("survey-action-link");
   const surveyInput = document.getElementById("survey-link-input");
   const qrImage = document.getElementById("survey-qr-img");
@@ -130,7 +130,7 @@ function parseAndPopulateMarkdown(markdown, projectId) {
         <div class="notebook-action-card" style="margin-bottom: 20px; padding: 14px 18px; border: 1px dashed #3b3329; border-radius: 6px; background-color: rgba(0, 0, 0, 0.15);">
           <p style="margin: 0 0 10px 0; font-size: 0.95rem; color: #d4cebe;">Interactive code, statistical charts, and analysis models are available in the Jupyter Notebook.</p>
           <a href="${notebookGithubUrl}" target="_blank" rel="noopener noreferrer" class="survey-start-btn" style="display: inline-block; text-decoration: none;">
-            📓 View Notebook on GitHub
+             View Notebook on GitHub
           </a>
         </div>
       `;
@@ -176,7 +176,7 @@ function setupProjectStages(project) {
       if (bodyContainer) bodyContainer.style.display = "block";
       const dateTag = document.createElement("p");
       dateTag.className = "stage-status-msg active-date";
-      dateTag.innerText = `Started on ${stageDate}`;
+      dateTag.innerText = `Posted on ${stageDate}`;
       panel.insertBefore(dateTag, bodyContainer);
     } else {
       // Future stage locked overlay
