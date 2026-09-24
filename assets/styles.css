@@ -60,7 +60,7 @@ h6 {
 
 }
 
-p {
+p, li {
   color: #b5ac98;
   font-family: 'Advent Pro', cursive, sans-serif;
   font-size: 1.15rem;

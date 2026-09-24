@@ -69,35 +69,42 @@ async function renderSurveys(projects) {
   if (!container) return;
 
   if (projects.length === 0) {
-    container.innerHTML = "<p style='text-align: center; color: #8c826e; margin-top: 20px;'>No surveys found in this category.</p>";
+    container.innerHTML = "<p style='text-align: center; color: #8c826e; margin-top: 20px;'>No surveys found at this time.</p>";
     return;
   }
 
-  // 1. Check survey existence for all projects concurrently
+  // 1. Check if the project folder actually contains the survey HTML file
   const surveyChecks = await Promise.all(
     projects.map(async (project) => {
       const questionUrl = `../data/projects/${project.id}/${project.id}.html`;
+      
       try {
-        // Use HEAD method to check existence without downloading full file contents
-        const res = await fetch(questionUrl, { method: "HEAD" });
-        return { project, hasSurvey: res.ok };
+        const res = await fetch(questionUrl, { cache: "no-cache" });
+
+        // If GitHub Pages returns 404 (or anything other than 200 OK), the file does not exist
+        if (!res.ok) {
+          return { project, hasSurvey: false };
+        }
+
+        // Catch cases where GitHub Pages serves a 404.html template with status 200
+        const text = await res.text();
+        const is404 = text.includes("404") || text.includes("File not found") || text.trim() === "";
+
+        return { project, hasSurvey: !is404 };
       } catch (err) {
         return { project, hasSurvey: false };
       }
     })
   );
 
-  // 2. Render cards based on the check result
+  // 2. Render only projects whose survey files genuinely exist
   const cardsHtml = surveyChecks
-    .map(({ project, hasSurvey }) => {
-      if (!hasSurvey) {
-        return ""; // or return an alternate card/message if desired
-      }
-
+    .filter(({ hasSurvey }) => hasSurvey)
+    .map(({ project }) => {
       const stageNum = Number(project.stage);
       const stageClass = getStageClass(stageNum);
       const stageLabel = getStageLabel(stageNum);
-      const projectUrl = `https://infunibuley.github.io/pages/survey?id=${project.id}`;
+      const projectUrl = `https://infunibuley.github.io/pages/survey.html?id=${project.id}`;
 
       let isOpen = false;
       let surveyStatus = "na";
