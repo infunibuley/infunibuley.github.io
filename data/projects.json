@@ -1,36 +1,13 @@
 [
   { 
-    "id": "project1",
-    "title": "Project1",
-    "stage": "your sticks",
-    "description": "Cross-referencing stated favorite colors against personality metrics and regional upbringing.",
-    "mind_works": "8/12/2026",
-    "the_gears": "8/20/2026",
-    "your_sticks": "9/20/2026",
-    "fancy_stuff": "10/20/2026",
-    "complete": "11/20/2026"
-
-  },
-    { 
-    "id": "project2",
-    "title": "Project2",
-    "stage": "fancy stuff",
-    "description": "Cross-referencing stated favorite colors against personality metrics and regional upbringing.",
-    "mind_works": "8/12/2026",
-    "the_gears": "8/20/2026",
-    "your_sticks": "9/20/2026",
-    "fancy_stuff": "10/20/2026",
-    "complete": "11/20/2026"
-  },
-      { 
-    "id": "project3",
-    "title": "Project3",
-    "stage": "complete",
-    "description": "Cross-referencing stated favorite colors against personality metrics and regional upbringing.",
-    "mind_works": "8/12/2026",
-    "the_gears": "8/20/2026",
-    "your_sticks": "9/20/2026",
-    "fancy_stuff": "10/20/2026",
-    "complete": "11/20/2026"
+    "id": "nsduh-eda",
+    "title": "National Survey on Drug Use and Health (NSDUH) Exploratory Data Analysis",
+    "stage": 1,
+    "description": "An Exploratory Data Analysis on national mental health and substance use data looking at differences in culture and groups.",
+    "napkin_blueprints": "8/12/2026",
+    "ancient_scrolls": "8/20/2026",
+    "calling_all_echoes": "9/20/2026",
+    "cranking_the_dials": "10/20/2026",
+    "the_final_verdict": "11/20/2026"
   }
 ]

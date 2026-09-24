@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Project — infunibuley</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@400;500;600&family=Barrio&family=Barriecito&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="icon" type="image/png" href="https://infunibuley.github.io/assets/favicon.png">
+  <script src="../../scripts/project-tab.js" defer></script>
+  <script src="../scripts/load-layout.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+<div>
+
+  <div id="site-header"></div>
+
+  <div class="flex-container">
+    <h2 id="project-header-title">Loading Project...</h2>
+
+  </div>
+
+  <div class="flex-container">
+    <p class="repo-link-wrap">
+    <a id="project-folder-link" href="#" target="_blank" rel="noopener noreferrer" style="color: #8da47e; font-size: 0.95rem; text-decoration: underline;">
+      View Project Files on github
+    </a>
+    </p>
+  </div>
+  
+  <!-- 5 Stage Tabs (Numeric 1-5 with New Names) -->
+  <div class="tab-container">
+    <button class="tab-btn" data-stage="1" data-target="mind-works">1. Napkin Blueprints</button>
+    <button class="tab-btn" data-stage="2" data-target="the-gears">2. Ancient Scrolls</button>
+    <button class="tab-btn" data-stage="3" data-target="your-sticks">3. Calling all Echoes</button>
+    <button class="tab-btn" data-stage="4" data-target="fancy-stuff">4. Cranking the Dials</button>
+    <button class="tab-btn" data-stage="5" data-target="complete">5. The Final Verdict</button>
+  </div>
+
+  <!-- Stage 1 Panel: Napkin Blueprints -->
+  <div id="mind-works" class="content-container tab-content" data-stage="1">
+    <h4>1. Napkin Blueprints</h4>
+    <div class="stage-body" id="stage-body-1">
+    </div>
+  </div>
+
+  <!-- Stage 2 Panel: Ancient Scrolls -->
+  <div id="the-gears" class="content-container tab-content" data-stage="2">
+    <h4>2. Ancient Scrolls</h4>
+    <div class="stage-body" id="stage-body-2">
+    </div>
+  </div>
+
+  <!-- Stage 3 Panel: Calling all Echoes (Survey Action) -->
+  <div id="your-sticks" class="content-container tab-content" data-stage="3">
+    <h4>3. Calling all Echoes</h4>
+    <div class="stage-body" id="stage-body-3">
+      <p>Share your thoughts. <br>Fill out the survey or share it with someone who has strong opinions :)</p>
+
+      <div class="survey-action-card">
+        <a href="#" id="survey-action-link" class="survey-start-btn">
+          Take the Survey
+        </a>
+
+        <div class="share-box">
+          <div class="share-link-group">
+            <input 
+              type="text" 
+              id="survey-link-input" 
+              value="" 
+              readonly
+            >
+            <button id="copy-btn" class="copy-btn" onclick="copySurveyLink()">Copy Link</button>
+          </div>
+          <p id="copy-feedback" class="copy-feedback">Copied to clipboard!</p>
+
+          <div class="qr-container">
+            <img 
+              id="survey-qr-img"
+              src="" 
+              alt="Survey QR Code" 
+              class="survey-qr"
+            >
+            <span class="qr-caption">Scan to share or take on mobile</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stage 4 Panel: Cranking the Dials -->
+  <div id="fancy-stuff" class="content-container tab-content" data-stage="4">
+    <h4>4. Cranking the Dials</h4>
+    <div class="stage-body" id="stage-body-4">
+    </div>
+  </div>
+
+  <!-- Stage 5 Panel: The Final Verdict -->
+  <div id="complete" class="content-container tab-content" data-stage="5">
+    <h4>5. The Final Verdict</h4>
+    <div class="stage-body" id="stage-body-5">
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="https://instagram.com/infunibuley" target="_blank">Instagram</a>
+      <a href="https://substack.com/@infunibuley" target="_blank">Substack</a>
+      <a href="https://github.com/infunibuley" target="_blank">GitHub</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

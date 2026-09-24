@@ -5,97 +5,53 @@
   <link rel="icon" type="image/png" href="https://infunibuley.github.io/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>infunibuley</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="scripts/forms.js" defer></script>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="scripts/load-layout.js" defer></script>
+  <script src="scripts/home.js" defer></script>
   <link rel="icon" type="image/png" href="https://infunibuley.github.io/assets/favicon.png">
 </head>
 
 <body>
 <div>
 
-  <header class="header">
-    <h1> <a href="https://infunibuley.github.io/">infunibuley</a> </h1>
-    <div class="flex-container">
-      <div class="text-block">
-        <h3> <a href="https://infunibuley.github.io/pages/projects">Projects</a> </h3>
-      </div>
-      <div class="text-block">
-        <h3> <a href="https://infunibuley.github.io/pages/about">About</a> </h3>
-      </div>
-      <div class="text-block">
-        <h3> <a href="https://infunibuley.github.io/pages/guide">Quick Guide</a> </h3>
-      </div>
-      <div class="text-block">
-        <h3> <a href="https://infunibuley.github.io/pages/surveys">Surveys</a> </h3>
-      </div>
-    </div>
-  </header>
+  <div id="site-header"></div>
 
   <div class="flex-container">
-    <div class="project-update update">
-      <p>Latest Update</p>
-      <h3> <a href="https://infunibuley.github.io/pages/projects/project1" class="project-title-link">project1</a> </h3>
-      <span class="tag tag-your-sticks">Stage: mind works</span>
-    </div>
-
-    <div class="survey-update update">
-      <p>Latest Survey</p>
-      <h3> <a href="https://infunibuley.github.io/pages/surveys/project1" class="project-title-link">project1</a> </h3>
-      <span class="tag tag-your-sticks">Stage: mind works</span>
-    </div> 
+    <h4>What <i>is</i> infunibuley?</h4>
   </div>
 
   <div class="flex-container">
-    <form data-survey-form class="suggestion-box">
-      <input type="hidden" name="sheet_name" value="suggestions">
-      <h3>Suggestions</h3>
-      <h3>let me borrow your mind</h3>
-      <p>Please do not share any personal information (such as email, location, full name, birthdate, etc.) if you are under the age of 13.</p>
-
-      <div class="form-group">
-        <label for="alias">Alias*:</label>
-        <input type="text" id="alias" name="alias" required placeholder="who am I crediting for this">
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email: (optional)</label>
-        <input type="email" id="email" name="email" placeholder="your@email.com">
-      </div>
-
-      <div class="form-group">
-        <label for="instagram">Instagram: (optional)</label>
-        <input type="text" id="instagram" name="instagram" placeholder="@username">
-      </div>
-
-      <div class="form-group">
-        <label for="substack">Substack: (optional)</label>
-        <input type="text" id="substack" name="substack" placeholder="yourname.substack.com">
-      </div>
-
-      <div class="form-group">
-        <label for="project">Project:</label>
-        <input type="text" id="project" name="project" placeholder="is this for a specific project? If yes, pls lmk">
-      </div>
-
-      <div class="form-group">
-        <label for="suggestion">Suggestion*:</label>
-        <textarea id="suggestion" name="suggestion" rows="4" required placeholder="What's on your mind?"></textarea>
-      </div>
-
-      <input type="hidden" name="redirect" value="https://infunibuley.github.io/">
-
-      <button type="submit" class="submit-btn">Submit</button>
-      <p class="form-status" style="display: none; text-align: center; margin-top: 10px;"></p>
-    </form>
+    <p>Infunibuley is a blog-ish fun site just for me to post some independent projects which some might call research, but I call touching data. My hope is that I can eventually get good enough to make surveys to find real data that changes the way we see the people around us (hopefully for the better, I'm an optimist/realist).</p>
   </div>
 
-  <footer class="footer">
-    <div class="footer-links">
-      <a href="https://instagram.com/infunibuley" target="_blank">Instagram</a>
-      <a href="https://substack.com/@infunibuley" target="_blank">Substack</a>
-      <a href="https://github.com/infunibuley" target="_blank">GitHub</a>
+  <section class="hero-banner">
+    <div class="flex-container hero-cards-container">
+      <!-- Latest Update Card -->
+      <div class="project-update update">
+        <h4>Latest Update</h4>
+        <h3>
+          <a href="#" id="latest-project-link" class="project-title-link">Loading...</a>
+        </h3>
+        <span id="latest-project-tag" class="tag tag-mind-works">Loading...</span>
+      </div>
+
+      <!-- Latest Survey Card -->
+      <div id="latest-survey-card" class="survey-update update">
+        <h4>Latest Survey</h4>
+        <h3>
+          <a href="#" id="latest-survey-link" class="project-title-link">Loading...</a>
+        </h3>
+        <span id="latest-survey-tag" class="tag tag-your-sticks">Loading...</span>
+      </div> 
     </div>
-  </footer>
+  </section>
+
+  <div class="flex-container">
+  <a class="survey-start-btn" href="https://infunibuley.github.io/pages/contact">Give me a piece of your mind!</a>
+  <p>(It's a suggestion box, not surgery, dw)</p>
+  </div>
+
+<div id="site-footer"></div>
 
 </div>
 

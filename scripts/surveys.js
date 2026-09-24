@@ -1,12 +1,11 @@
 let allProjects = [];
 
-// Stage order mapping (Stage 1 -> Stage 5)
-const STAGE_ORDER = {
-  "mind works": 1,
-  "the gears": 2,
-  "your sticks": 3,
-  "fancy stuff": 4,
-  "complete": 5
+const STAGE_CONFIG = {
+  1: { label: "1. Napkin Blueprints", cssClass: "tag-mind-works" },
+  2: { label: "2. Ancient Scrolls", cssClass: "tag-the-gears" },
+  3: { label: "3. Calling all Echoes", cssClass: "tag-your-sticks" },
+  4: { label: "4. Cranking the Dials", cssClass: "tag-fancy-stuff" },
+  5: { label: "5. The Final Verdict", cssClass: "tag-complete" }
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -16,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then((data) => {
-      // Sort projects by stage order
       allProjects = sortProjectsByStage(data);
       renderSurveys(allProjects);
     })
@@ -41,7 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
         renderSurveys(allProjects);
       } else {
         const filtered = allProjects.filter((p) => {
-          const isOpen = p.stage && p.stage.toLowerCase().trim() === "your sticks";
+          // Stage 3 corresponds to open surveys ("Calling all Echoes")
+          const isOpen = Number(p.stage) === 3;
           const surveyStatus = isOpen ? "open" : "closed";
           return surveyStatus === filter;
         });
@@ -51,31 +50,18 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Helper function to sort projects from Stage 1 -> Stage 5
 function sortProjectsByStage(projects) {
-  return [...projects].sort((a, b) => {
-    const orderA = STAGE_ORDER[a.stage ? a.stage.toLowerCase().trim() : ""] || 99;
-    const orderB = STAGE_ORDER[b.stage ? b.stage.toLowerCase().trim() : ""] || 99;
-    return orderA - orderB;
-  });
+  return [...projects].sort((a, b) => (Number(a.stage) || 99) - (Number(b.stage) || 99));
 }
 
-// Map stage names to CSS tag classes
 function getStageClass(stage) {
-  switch (stage ? stage.toLowerCase().trim() : "") {
-    case "mind works":
-      return "tag-mind-works";
-    case "the gears":
-      return "tag-the-gears";
-    case "your sticks":
-      return "tag-your-sticks";
-    case "fancy stuff":
-      return "tag-fancy-stuff";
-    case "complete":
-      return "tag-complete";
-    default:
-      return "tag-mind-works";
-  }
+  const config = STAGE_CONFIG[Number(stage)];
+  return config ? config.cssClass : "tag-mind-works";
+}
+
+function getStageLabel(stage) {
+  const config = STAGE_CONFIG[Number(stage)];
+  return config ? config.label : `Stage ${stage}`;
 }
 
 // Render cards into DOM
@@ -90,17 +76,22 @@ function renderSurveys(projects) {
 
   container.innerHTML = projects
     .map((project) => {
-      const stageClass = getStageClass(project.stage);
-      const projectUrl = `https://infunibuley.github.io/pages/surveys/${project.id}`;
-      const isOpen = (project.stage && project.stage.toLowerCase().trim() === "your sticks");
-      const surveyStatus = isOpen ? "open" : "closed";
+      const stageNum = Number(project.stage);
+      const stageClass = getStageClass(stageNum);
+      const stageLabel = getStageLabel(stageNum);
       
-      const closeDate = project.fancy_stuff || "TBD";
+      // Point to layout template with ?id=
+      const projectUrl = `https://infunibuley.github.io/pages/survey.html?id=${project.id}`;
+      
+      // Stage 3 is open; closing date is based on stage 4 deadline (cranking_the_dials)
+      const isOpen = stageNum === 3;
+      const surveyStatus = isOpen ? "open" : "closed";
+      const closeDate = project.cranking_the_dials || project.fancy_stuff || "TBD";
       const dateLabel = isOpen ? `Closes on ${closeDate}` : `Closed on ${closeDate}`;
 
       return `
         <div class="update project-card" data-status="${surveyStatus}">
-          <span class="tag ${stageClass}">Stage: ${project.stage}</span>
+          <span class="tag ${stageClass}">${stageLabel}</span>
           <h3><a href="${projectUrl}" class="project-title-link">${project.title}</a></h3>
           <div class="flex-container">
             <p>${project.description}</p>

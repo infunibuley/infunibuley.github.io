@@ -1,11 +1,32 @@
 let allProjects = [];
 
-const STAGE_ORDER = {
-  "mind works": 1,
-  "the gears": 2,
-  "your sticks": 3,
-  "fancy stuff": 4,
-  "complete": 5
+// Mapping numeric stage (1-5) to display titles, legacy CSS classes, and json date keys
+const STAGE_CONFIG = {
+  1: {
+    label: "1. Napkin Blueprints",
+    cssClass: "tag-mind-works",
+    dateKey: "napkin_blueprints"
+  },
+  2: {
+    label: "2. Ancient Scrolls",
+    cssClass: "tag-the-gears",
+    dateKey: "ancient_scrolls"
+  },
+  3: {
+    label: "3. Calling all Echoes",
+    cssClass: "tag-your-sticks",
+    dateKey: "calling_all_echoes"
+  },
+  4: {
+    label: "4. Cranking the Dials",
+    cssClass: "tag-fancy-stuff",
+    dateKey: "cranking_the_dials"
+  },
+  5: {
+    label: "5. The Final Verdict",
+    cssClass: "tag-complete",
+    dateKey: "the_final_verdict"
+  }
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -38,7 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
         renderProjects(allProjects);
       } else {
         const filtered = allProjects.filter((p) => {
-          const projectStatus = p.stage === "complete" ? "complete" : "in-progress";
+          // Stage 5 is considered complete; stages 1-4 are in-progress
+          const projectStatus = Number(p.stage) === 5 ? "complete" : "in-progress";
           return projectStatus === filter;
         });
         renderProjects(filtered);
@@ -49,34 +71,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function sortProjectsByStage(projects) {
   return [...projects].sort((a, b) => {
-    const orderA = STAGE_ORDER[a.stage ? a.stage.toLowerCase().trim() : ""] || 99;
-    const orderB = STAGE_ORDER[b.stage ? b.stage.toLowerCase().trim() : ""] || 99;
-    return orderA - orderB;
+    const stageA = Number(a.stage) || 99;
+    const stageB = Number(b.stage) || 99;
+    return stageA - stageB;
   });
 }
 
 function getStageClass(stage) {
-  switch (stage ? stage.toLowerCase().trim() : "") {
-    case "mind works":
-      return "tag-mind-works";
-    case "the gears":
-      return "tag-the-gears";
-    case "your sticks":
-      return "tag-your-sticks";
-    case "fancy stuff":
-      return "tag-fancy-stuff";
-    case "complete":
-      return "tag-complete";
-    default:
-      return "tag-mind-works";
-  }
+  const config = STAGE_CONFIG[Number(stage)];
+  return config ? config.cssClass : "tag-mind-works";
+}
+
+function getStageLabel(stage) {
+  const config = STAGE_CONFIG[Number(stage)];
+  return config ? config.label : `Stage ${stage}`;
 }
 
 function getStageDate(project) {
-  if (!project.stage) return "TBD";
+  const stageNum = Number(project.stage);
+  const config = STAGE_CONFIG[stageNum];
   
-  const stageKey = project.stage.toLowerCase().trim().replace(/\s+/g, "_");
-  return project[stageKey] || "TBD";
+  if (!config) return "TBD";
+
+  // Checks new snake_case key, numeric string/number key, or 'updated_at' fallback
+  return project[config.dateKey] || project[stageNum] || project.updated_at || "TBD";
 }
 
 // Render cards into DOM
@@ -91,15 +109,16 @@ function renderProjects(projects) {
 
   container.innerHTML = projects
     .map((project) => {
-      const stageClass = getStageClass(project.stage);
-      const projectUrl = `https://infunibuley.github.io/pages/projects/${project.id}`;
-      const status = project.stage === "complete" ? "complete" : "in-progress";
-      
+      const stageNum = Number(project.stage);
+      const stageClass = getStageClass(stageNum);
+      const stageLabel = getStageLabel(stageNum);
+      const projectUrl = `https://infunibuley.github.io/pages/project/?id=${project.id}`;
+      const status = stageNum === 5 ? "complete" : "in-progress";
       const lastUpdateDate = getStageDate(project);
 
       return `
-        <div class="update project-card" data-status="${status}">
-          <span class="tag ${stageClass}">Stage: ${project.stage}</span>
+        <div class="update project-update" data-status="${status}">
+          <span class="tag ${stageClass}">${stageLabel}</span>
           <h3><a href="${projectUrl}" class="project-title-link">${project.title}</a></h3>
           <div class="flex-container">
             <p>${project.description}</p>

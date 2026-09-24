@@ -4,31 +4,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@400;500;600&family=Barrio&family=Barriecito&display=swap" rel="stylesheet">  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>infunibuley: surveys</title>
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../../assets/styles.css">
   <script src="../scripts/surveys.js" defer></script>
+  <script src="../scripts/load-layout.js" defer></script>
   <link rel="icon" type="image/png" href="https://infunibuley.github.io/assets/favicon.png">
 </head>
 
 <body>
-<div>
-
-  <header class="header">
-    <h1> <a href="https://infunibuley.github.io/">infunibuley</a> </h1>
-    <div class="flex-container">
-      <div class="text-block">
-        <h3> <a href="https://infunibuley.github.io/pages/projects">Projects</a> </h3>
-      </div>
-      <div class="text-block">
-        <h3> <a href="https://infunibuley.github.io/pages/about">About</a> </h3>
-      </div>
-      <div class="text-block">
-        <h3> <a href="https://infunibuley.github.io/pages/guide">Quick Guide</a> </h3>
-      </div>
-      <div class="text-block">
-        <h3> <a href="https://infunibuley.github.io/pages/surveys">Surveys</a> </h3>
-      </div>
-    </div>
-  </header>
+<div id="site-header"></div>
 
   <div class="tab-container">
     <button class="tab-btn active" data-filter="all">All</button>
@@ -38,15 +21,7 @@
 
   <div id="projects-container" class="projects-grid"></div>
 
-  <footer class="footer">
-    <div class="footer-links">
-      <a href="https://instagram.com/infunibuley" target="_blank">Instagram</a>
-      <a href="https://substack.com/@infunibuley" target="_blank">Substack</a>
-      <a href="https://github.com/infunibuley" target="_blank">GitHub</a>
-    </div>
-  </footer>
-
-</div>
+<div id="site-footer"></div>
 
 </body>
 </html>

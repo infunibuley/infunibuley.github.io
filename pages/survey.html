@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="survey-page-title">Project Survey — infunibuley</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@400;500;600&family=Barrio&family=Barriecito&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/styles.css">
+  <link rel="icon" type="image/png" href="https://infunibuley.github.io/assets/favicon.png">
+  <script src="../../scripts/load-layout.js" defer></script>
+  <script src="../../scripts/forms.js" defer></script>
+  <script src="../../scripts/load-survey.js" defer></script>
+</head>
+
+<body>
+<div>
+
+  <div id="site-header"></div>
+
+  <div class="flex-container">
+    <div class="text-block">
+      <h2><a id="project-link" href="#">Loading Project...</a></h2>
+    </div>
+  </div>
+
+  <div class="flex-container">
+    <h4>Calling all Echoes</h4>
+  </div>
+
+  <div class="flex-container">
+    <form data-survey-form class="suggestion-box" id="survey-form">
+      <input type="hidden" name="sheet_name" id="sheet-name-input" value="">
+
+      <h3 id="form-heading-title">Loading Survey...</h3>
+
+      <!-- Dynamic Questions from project folder inject here -->
+      <div id="survey-questions-container">
+        <p style="color: #8c826e;">Loading questions...</p>
+      </div>
+
+      <button type="submit" class="submit-btn" id="survey-submit-btn">Submit</button>
+    </form>
+    
+    <p class="form-status" style="display: none; text-align: center; margin-top: 10px;"></p>
+  </div>
+
+  <div id="site-footer"></div>
+
+</div>
+</body>
+</html>
