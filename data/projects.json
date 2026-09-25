@@ -1,11 +1,11 @@
 [
   { 
     "id": "nsduh-eda",
-    "title": "TESTING National Survey on Drug Use and Health (NSDUH) Exploratory Data Analysis",
+    "title": "National Survey on Drug Use and Health (NSDUH) Exploratory Data Analysis",
     "stage": 1,
     "description": "An Exploratory Data Analysis on national mental health and substance use data looking at differences in culture and groups.",
     "napkin_blueprints": "9/23/2026",
-    "ancient_scrolls": "TBD",
+    "ancient_scrolls": "9/24/2026",
     "calling_all_echoes": "TBD",
     "cranking_the_dials": "TBD",
     "the_final_verdict": "TBD"
