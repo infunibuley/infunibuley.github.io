@@ -4,18 +4,20 @@ p-id
 <!-- description -->
 An Exploratory Data Analysis on national mental health and substance use data looking at differences in culture and groups. 
 
+## Table of Contents
+
+- [1. Napkin Blueprints](#1-napkin-blueprints)
+- [2. Ancient Scrolls](#2-ancient-scrolls)
+  - [Literature Review & Theoretical Background](#literature-review--theoretical-background)
+  - [US 2024 Population Baselines](#us-2024-data)
+  - [SAMHSA NSDUH Data & Methodology](#samhsa-nsduh-data)
+  - [References](#references)
+- [3. Calling All Echoes](#3-calling-all-echoes)
+- [4. Cranking the Dials](#4-cranking-the-dials)
+- [5. The Final Verdict](#5-the-final-verdict)
+
 ## 1. Napkin Blueprints
-Mental Health Data: there's the idea that different races have different mental health attention. (I'm asian, I can attest to at least the feeling)
-
-What is the difference in diagnosed/recieving help to needs help ratio between different races/incomes/genders/sexes/age and whatever
-
-How much is the sample size of lgbtqia+ respondents? If it's large enough, how do sexually queer and gender queer people differ in mental health? How drastic is the difference in mental health concerns between queer people and cis-het people? Are queer people more likely to get mental health help? 
-
-Are younger people more likely to get mental health counseling? Are younger or older people more likely to abuse substances? 
-
-Is there a correlation between anything and substance use and abuse? 
-
-idk this is a fun dataset
+Coming Eventually! 
 
 ## 2. Ancient Scrolls
 Coming Eventually! 

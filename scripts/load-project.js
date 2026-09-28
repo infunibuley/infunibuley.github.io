@@ -192,16 +192,24 @@ function setupProjectStages(project) {
     }
   });
 
-  // Activate the button and panel matching project.stage
+  // Always activate Stage 1 on load
+  const initialStage = 1;
   tabButtons.forEach((btn) => {
     const btnStageNum = Number(btn.getAttribute("data-stage"));
-    if (btnStageNum === currentStageNum) {
+    if (btnStageNum === initialStage) {
       btn.classList.add("active");
       const targetId = btn.getAttribute("data-target");
       const targetContent = document.getElementById(targetId);
       if (targetContent) targetContent.classList.add("active");
     } else {
       btn.classList.remove("active");
+    }
+  });
+
+  // Ensure other panels lose the active class in case the HTML has defaults set
+  tabContents.forEach((panel) => {
+    if (Number(panel.getAttribute("data-stage")) !== initialStage) {
+      panel.classList.remove("active");
     }
   });
 }
