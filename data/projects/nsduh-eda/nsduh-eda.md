@@ -8,7 +8,7 @@ An Exploratory Data Analysis on national mental health and substance use data lo
 
 - [1. Napkin Blueprints](#1-napkin-blueprints)
 - [2. Ancient Scrolls](#2-ancient-scrolls)
-  - [Literature Review & Theoretical Background](#literature-review--theoretical-background)
+  - [Relevant Research](#literature-review--theoretical-background)
   - [US 2024 Population Baselines](#us-2024-data)
   - [SAMHSA NSDUH Data & Methodology](#samhsa-nsduh-data)
   - [References](#references)
@@ -38,36 +38,21 @@ idk this is a fun dataset
 
 ## 2. Ancient Scrolls
 
-### Literature Review
-
-#### Internalizing the model minority myth: Dangers for Asian American mental health and attitudes towards other minorities
+### Relevant Research/Readings
 
 *Rajagopal, S. K., & Durkee, M. I. (2024). Internalizing the model minority myth: Dangers for Asian American mental health and attitudes towards other minorities. Social and Personality Psychology Compass, 18(5). https://doi.org/10.1111/spc3.12959*
 
-
-#### Trends in college student mental health and help-seeking by race/ethnicity: Findings from the national healthy minds study, 2013–2021
-
 *Lipson, S. K., Zhou, S., Abelson, S., Heinze, J., Jirsa, M., Morigney, J., Patterson, A., Singh, M., & Eisenberg, D. (2022). Trends in college student mental health and help-seeking by race/ethnicity: Findings from the national healthy minds study, 2013–2021. Journal of Affective Disorders, 306(1), 138–147. https://doi.org/10.1016/j.jad.2022.03.038*
-
-#### Mental Health and Care Utilization Among Sexual and Gender Minority Youth by Race and Ethnicity
-
-*Lee, H., Abramson, J. R., Bhoja, A., Watson, R. J., & Mereish, E. H. (2025). Mental Health and Care Utilization Among Sexual and Gender Minority Youth by Race and Ethnicity. Journal of Adolescent Health. https://doi.org/10.1016/j.jadohealth.2024.11.244*
-
-#### Application and Use of Andersen’s Behavioral Model as Theoretical Framework: A Systematic Literature Review from 2012–2021
-
-*Abdullah Alkhawaldeh, ALBashtawy, M., Rayan, A., Asem Abdalrahim, Musa, A. S., Eshah, N. F., Abdallah Abu Khait, Qaddumi, J., Khraisat, O., & Sa’d ALBashtawy. (2023). Application and Use of Andersen’s Behavioral Model as Theoretical Framework: A Systematic Literature Review from 2012–2021. Iranian Journal of Public Health, 52(7). https://doi.org/10.18502/ijph.v52i7.13236*
-
-#### Minority stress theory: Application, critique, and continued relevance
-
-*Frost, D. M., & Meyer, I. H. (2023). Minority stress theory: Application, critique, and continued relevance. Current Opinion in Psychology, 51. https://doi.org/10.1016/j.copsyc.2023.101579*
-
-#### Men’s mental health in the context of hegemonic norms of masculinity: A developmental and interdisciplinary literature review
 
 *Dworakowska, J. (2026). Men’s mental health in the context of hegemonic norms of masculinity: A developmental and interdisciplinary literature review. Kwartalnik Naukowy Fides Et Ratio, 65(1), 74-82. https://doi.org/10.34766/0v5em641*
 
-#### Critical Overview of Patriarchy, Its Interferences With Psychological Development, and Risks for Mental Health
-
 *Gupta, M., Madabushi, J. S., & Gupta, N. (2023). Critical overview of patriarchy, its interferences with psychological development, and risks for mental health. Cureus, 15(6). https://doi.org/10.7759/cureus.40216*
+
+*Lee, H., Abramson, J. R., Bhoja, A., Watson, R. J., & Mereish, E. H. (2025). Mental Health and Care Utilization Among Sexual and Gender Minority Youth by Race and Ethnicity. Journal of Adolescent Health. https://doi.org/10.1016/j.jadohealth.2024.11.244*
+
+*Frost, D. M., & Meyer, I. H. (2023). Minority stress theory: Application, critique, and continued relevance. Current Opinion in Psychology, 51. https://doi.org/10.1016/j.copsyc.2023.101579*
+
+*Abdullah Alkhawaldeh, ALBashtawy, M., Rayan, A., Asem Abdalrahim, Musa, A. S., Eshah, N. F., Abdallah Abu Khait, Qaddumi, J., Khraisat, O., & Sa’d ALBashtawy. (2023). Application and Use of Andersen’s Behavioral Model as Theoretical Framework: A Systematic Literature Review from 2012–2021. Iranian Journal of Public Health, 52(7). https://doi.org/10.18502/ijph.v52i7.13236*
 
 <br>
 
@@ -80,6 +65,8 @@ idk this is a fun dataset
 | Female | Male |
 | -------- | -------- |
 | 50.4% | 49.6% |
+
+<br>
 
 **Race/Ethnicity Distribution:**
 
@@ -95,6 +82,8 @@ idk this is a fun dataset
 | Native American and Alaska Native, not Hispanic | 2.41M |
 | Pacific Islander, not Hispanic | 0.69M |
 
+<br>
+
 **Age Distribution:**
 
 *United States Census Bureau. (2024). Annual Estimates of the Resident Population for Selected Age Groups by Sex for the United States: April 1, 2020 to July 1, 2024 (NC-EST2024-AGESEX). U.S. Census Bureau, Population Division. https://www.census.gov/programs-surveys/popest.html*
@@ -106,6 +95,8 @@ idk this is a fun dataset
 | 25-44 | 90.62M |
 | 45-64 | 80.95M |
 | 65+ | 60.23M |
+
+<br>
 
 **Income Distribution:**
 
@@ -122,6 +113,8 @@ idk this is a fun dataset
 | $100,000 to $149,999 | 16.4% |
 | $150,000 to $199,999 | 9.9% |
 | $200,000 and over | 15.8% |
+
+<br>
 
 **LGBTQIA+ Distribution:**
 
@@ -227,8 +220,22 @@ Also please do not take the snippits I added as if it is a comprehensive summary
 
 *Jones, J. (2021, March 3). What Percentage of Americans Are LGBT? Gallup.Com. https://news.gallup.com/poll/332522/percentage-americans-lgbt.aspx*
 
+*Rajagopal, S. K., & Durkee, M. I. (2024). Internalizing the model minority myth: Dangers for Asian American mental health and attitudes towards other minorities. Social and Personality Psychology Compass, 18(5). https://doi.org/10.1111/spc3.12959*
+
+*Lipson, S. K., Zhou, S., Abelson, S., Heinze, J., Jirsa, M., Morigney, J., Patterson, A., Singh, M., & Eisenberg, D. (2022). Trends in college student mental health and help-seeking by race/ethnicity: Findings from the national healthy minds study, 2013–2021. Journal of Affective Disorders, 306(1), 138–147. https://doi.org/10.1016/j.jad.2022.03.038*
+
+*Dworakowska, J. (2026). Men’s mental health in the context of hegemonic norms of masculinity: A developmental and interdisciplinary literature review. Kwartalnik Naukowy Fides Et Ratio, 65(1), 74-82. https://doi.org/10.34766/0v5em641*
+
+*Gupta, M., Madabushi, J. S., & Gupta, N. (2023). Critical overview of patriarchy, its interferences with psychological development, and risks for mental health. Cureus, 15(6). https://doi.org/10.7759/cureus.40216*
+
+*Lee, H., Abramson, J. R., Bhoja, A., Watson, R. J., & Mereish, E. H. (2025). Mental Health and Care Utilization Among Sexual and Gender Minority Youth by Race and Ethnicity. Journal of Adolescent Health. https://doi.org/10.1016/j.jadohealth.2024.11.244*
+
+*Frost, D. M., & Meyer, I. H. (2023). Minority stress theory: Application, critique, and continued relevance. Current Opinion in Psychology, 51. https://doi.org/10.1016/j.copsyc.2023.101579*
+
+*Abdullah Alkhawaldeh, ALBashtawy, M., Rayan, A., Asem Abdalrahim, Musa, A. S., Eshah, N. F., Abdallah Abu Khait, Qaddumi, J., Khraisat, O., & Sa’d ALBashtawy. (2023). Application and Use of Andersen’s Behavioral Model as Theoretical Framework: A Systematic Literature Review from 2012–2021. Iranian Journal of Public Health, 52(7). https://doi.org/10.18502/ijph.v52i7.13236*
+
 ## 3. Calling All Echoes
-There is no Survey for this Project
+N/A
 
 ## 4. Cranking the Dials
 N/A

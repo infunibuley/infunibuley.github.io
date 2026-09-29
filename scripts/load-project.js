@@ -41,22 +41,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (project) {
         setupProjectStages(project);
+        // Pass the project object so markdown parsing can check for "N/A" surveys
+        loadProjectMarkdown(projectId, project);
       } else {
         activateDefaultTab();
+        loadProjectMarkdown(projectId, null);
       }
-
-      // 3. Fetch and parse Markdown file: data/projects/{id}/{id}.md
-      loadProjectMarkdown(projectId);
     })
     .catch((err) => {
       console.warn("Error initializing project:", err);
       activateDefaultTab();
-      loadProjectMarkdown(projectId);
+      loadProjectMarkdown(projectId, null);
     });
 });
 
-// Fetches and parses the markdown file
-function loadProjectMarkdown(projectId) {
+// Fetches and parses the markdown file, passing along project metadata
+function loadProjectMarkdown(projectId, project) {
   const mdUrl = `../data/projects/${projectId}/${projectId}.md`;
 
   fetch(mdUrl)
@@ -65,7 +65,7 @@ function loadProjectMarkdown(projectId) {
       return res.text();
     })
     .then((mdText) => {
-      parseAndPopulateMarkdown(mdText, projectId);
+      parseAndPopulateMarkdown(mdText, projectId, project);
     })
     .catch((err) => {
       console.error("Failed to load markdown content:", err);
@@ -73,7 +73,7 @@ function loadProjectMarkdown(projectId) {
 }
 
 // Splits markdown by stage headers and fills DOM containers
-function parseAndPopulateMarkdown(markdown, projectId) {
+function parseAndPopulateMarkdown(markdown, projectId, project) {
   const GITHUB_BASE = "https://github.com/infunibuley/infunibuley.github.io/blob/main";
   const GITHUB_TREE = "https://github.com/infunibuley/infunibuley.github.io/tree/main";
 
@@ -92,16 +92,23 @@ function parseAndPopulateMarkdown(markdown, projectId) {
     folderLink.href = `${GITHUB_TREE}/data/projects/${projectId}/${projectId}.md`;
   }
 
-  // 3. Setup Stage 3 dynamic survey components
-  const surveyUrl = `https://infunibuley.github.io/pages/survey?id=${projectId}`;
-  const surveyActionLink = document.getElementById("survey-action-link");
-  const surveyInput = document.getElementById("survey-link-input");
-  const qrImage = document.getElementById("survey-qr-img");
+  // Check if Stage 3 has a valid survey (i.e. date is not "N/A")
+  const stage3Config = STAGE_CONFIG[3];
+  const stage3Date = (project && stage3Config && project[stage3Config.key]) || "TBD";
+  const stage3HasSurvey = stage3Date !== "N/A";
 
-  if (surveyActionLink) surveyActionLink.href = surveyUrl;
-  if (surveyInput) surveyInput.value = surveyUrl;
-  if (qrImage) {
-    qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(surveyUrl)}&bgcolor=24-1f-19&color=b2-c9-a5`;
+  // 3. Setup Stage 3 dynamic survey components only if survey exists
+  if (stage3HasSurvey) {
+    const surveyUrl = `https://infunibuley.github.io/pages/survey?id=${projectId}`;
+    const surveyActionLink = document.getElementById("survey-action-link");
+    const surveyInput = document.getElementById("survey-link-input");
+    const qrImage = document.getElementById("survey-qr-img");
+
+    if (surveyActionLink) surveyActionLink.href = surveyUrl;
+    if (surveyInput) surveyInput.value = surveyUrl;
+    if (qrImage) {
+      qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(surveyUrl)}&bgcolor=24-1f-19&color=b2-c9-a5`;
+    }
   }
 
   // 4. Split by Stage headers: ## [1-5].
@@ -139,11 +146,17 @@ function parseAndPopulateMarkdown(markdown, projectId) {
       continue;
     }
 
-    // Stage 3: Preserve the survey card
+    // Stage 3: Handle survey card visibility
     if (i === 3) {
       const surveyCard = bodyEl.querySelector(".survey-action-card");
       bodyEl.innerHTML = parsedHtml;
-      if (surveyCard) bodyEl.appendChild(surveyCard);
+      
+      if (stage3HasSurvey) {
+        if (surveyCard) bodyEl.appendChild(surveyCard);
+      } else {
+        // Remove the survey container completely if no survey exists for this project
+        if (surveyCard) surveyCard.remove();
+      }
       continue;
     }
 
@@ -161,38 +174,61 @@ function setupProjectStages(project) {
     const stageNum = Number(panel.getAttribute("data-stage"));
     const stageInfo = STAGE_CONFIG[stageNum];
     const stageDate = (stageInfo && project[stageInfo.key]) || "TBD";
+    const surveyExists = stageDate !== "N/A";
     const bodyContainer = panel.querySelector(".stage-body");
 
     // Remove previously injected status elements
     panel.querySelectorAll(".stage-status-msg, .future-lock-box").forEach((el) => el.remove());
 
     if (stageNum < currentStageNum) {
+      // Completed stages
       if (bodyContainer) bodyContainer.style.display = "block";
       const dateTag = document.createElement("p");
       dateTag.className = "stage-status-msg completed-date";
       dateTag.innerText = `Completed on ${stageDate}`;
       panel.insertBefore(dateTag, bodyContainer);
+
     } else if (stageNum === currentStageNum) {
+      // Active current stage
       if (bodyContainer) bodyContainer.style.display = "block";
+
+      if (!surveyExists) {
+        const noSurveyMsg = document.createElement("div");
+        noSurveyMsg.className = "future-lock-box";
+        noSurveyMsg.innerHTML = `
+          <p class="lock-icon">✦</p>
+          <p class="lock-text">There is no survey for this project.</p>
+        `;
+        panel.appendChild(noSurveyMsg);
+      }
+
       const dateTag = document.createElement("p");
       dateTag.className = "stage-status-msg active-date";
-      dateTag.innerText = `Posted on ${stageDate}`;
+      dateTag.innerText = surveyExists ? `Posted on ${stageDate}` : `Status: N/A`;
       panel.insertBefore(dateTag, bodyContainer);
+
     } else {
       // Future stage locked overlay
       if (bodyContainer) bodyContainer.style.display = "none";
       const lockMsg = document.createElement("div");
       lockMsg.className = "future-lock-box";
-      lockMsg.innerHTML = `
-        <p class="lock-icon">✦</p>
-        <p class="lock-text">We're getting there!</p>
-        <p class="lock-subtext">Come back on <strong>${stageDate}</strong></p>
-      `;
+
+      if (surveyExists) {
+        lockMsg.innerHTML = `
+          <p class="lock-icon">✦</p>
+          <p class="lock-text">We're getting there!</p>
+        `;
+      } else {
+        lockMsg.innerHTML = `
+          <p class="lock-icon">✦</p>
+          <p class="lock-text">No survey planned for this stage.</p>
+        `;
+      }
       panel.appendChild(lockMsg);
     }
   });
 
-  // Always activate Stage 1 on load
+  // Always force-start on Stage 1 on load
   const initialStage = 1;
   tabButtons.forEach((btn) => {
     const btnStageNum = Number(btn.getAttribute("data-stage"));
@@ -206,7 +242,7 @@ function setupProjectStages(project) {
     }
   });
 
-  // Ensure other panels lose the active class in case the HTML has defaults set
+  // Ensure other panels lose the active class
   tabContents.forEach((panel) => {
     if (Number(panel.getAttribute("data-stage")) !== initialStage) {
       panel.classList.remove("active");
