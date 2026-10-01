@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
         renderSurveys(allProjects);
       } else {
         const filtered = allProjects.filter((p) => {
-          // Stage 3 corresponds to open surveys ("Calling all Echoes")
           const isOpen = Number(p.stage) === 3;
           const surveyStatus = isOpen ? "open" : "closed";
           return surveyStatus === filter;
@@ -64,64 +63,33 @@ function getStageLabel(stage) {
   return config ? config.label : `Stage ${stage}`;
 }
 
-async function renderSurveys(projects) {
+function renderSurveys(projects) {
   const container = document.getElementById("projects-container");
   if (!container) return;
 
-  if (projects.length === 0) {
+  // Only show projects that have reached Stage 3 or above AND have a Tally form assigned
+  const surveyProjects = projects.filter((project) => {
+    const stageNum = Number(project.stage) || 1;
+    return stageNum >= 3 && Boolean(project.form_id);
+  });
+
+  if (surveyProjects.length === 0) {
     container.innerHTML = "<p style='text-align: center; color: #8c826e; margin-top: 20px;'>No surveys found at this time.</p>";
     return;
   }
 
-  // 1. Check if the project actually has an active or past survey
-  const surveyChecks = await Promise.all(
-    projects.map(async (project) => {
-      const stageNum = Number(project.stage) || 1;
-
-      // RULE 1: If it's Stage 1 or 2, it NEVER has a survey yet. No need to fetch.
-      if (stageNum < 3) {
-        return { project, hasSurvey: false };
-      }
-
-      const questionUrl = `../data/projects/${project.id}/${project.id}.html`;
-      
-      try {
-        const res = await fetch(questionUrl, { cache: "no-cache" });
-
-        if (!res.ok) {
-          return { project, hasSurvey: false };
-        }
-
-        const text = await res.text();
-
-        // RULE 2: If GitHub Pages redirected to index.html or 404, it starts with <!DOCTYPE
-        if (text.trim().toLowerCase().startsWith("<!doctype")) {
-          return { project, hasSurvey: false };
-        }
-
-        // RULE 3: A valid survey snippet must contain form fields
-        const hasFormFields = text.includes("<input") || text.includes("<textarea") || text.includes("form-group");
-
-        return { project, hasSurvey: hasFormFields };
-      } catch (err) {
-        return { project, hasSurvey: false };
-      }
-    })
-  );
-
-  // 2. Render only projects whose survey files genuinely exist and belong to stage >= 3
-  const cardsHtml = surveyChecks
-    .filter(({ hasSurvey }) => hasSurvey)
-    .map(({ project }) => {
+  const cardsHtml = surveyProjects
+    .map((project) => {
       const stageNum = Number(project.stage);
       const stageClass = getStageClass(stageNum);
       const stageLabel = getStageLabel(stageNum);
       const projectUrl = `https://infunibuley.github.io/pages/survey.html?id=${project.id}`;
 
-      let isOpen = stageNum === 3;
-      let surveyStatus = isOpen ? "open" : "closed";
+      const isOpen = stageNum === 3;
+      const surveyStatus = isOpen ? "open" : "closed";
 
-      const closeDate = project.cranking_the_dials || project.fancy_stuff || "TBD";
+      // Prefer the explicit survey_close field, falling back to cranking_the_dials
+      const closeDate = project.survey_close || project.cranking_the_dials || "TBD";
       const dateLabel = isOpen ? `Closes on ${closeDate}` : `Closed on ${closeDate}`;
 
       return `
@@ -137,5 +105,5 @@ async function renderSurveys(projects) {
     })
     .join("");
 
-  container.innerHTML = cardsHtml || "<p style='text-align: center; color: #8c826e; margin-top: 20px;'>No surveys found at this time.</p>";
+  container.innerHTML = cardsHtml;
 }
