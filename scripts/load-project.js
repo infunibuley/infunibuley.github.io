@@ -180,14 +180,32 @@ function setupProjectStages(project) {
     // Remove previously injected status elements
     panel.querySelectorAll(".stage-status-msg, .future-lock-box").forEach((el) => el.remove());
 
-    if (stageNum < currentStageNum) {
-      // Completed stages
+if (stageNum < currentStageNum) {
+      // Previous stages
       if (bodyContainer) bodyContainer.style.display = "block";
       const dateTag = document.createElement("p");
       dateTag.className = "stage-status-msg completed-date";
-      dateTag.innerText = `Completed on ${stageDate}`;
+      dateTag.innerText = stageDate;
       panel.insertBefore(dateTag, bodyContainer);
 
+    } else if (stageNum === currentStageNum) {
+      // Active current stage
+      if (bodyContainer) bodyContainer.style.display = "block";
+
+      if (!surveyExists) {
+        const noSurveyMsg = document.createElement("div");
+        noSurveyMsg.className = "future-lock-box";
+        noSurveyMsg.innerHTML = `
+          <p class="lock-icon">✦</p>
+          <p class="lock-text">There is no survey for this project.</p>
+        `;
+        panel.appendChild(noSurveyMsg);
+      }
+
+      const dateTag = document.createElement("p");
+      dateTag.className = "stage-status-msg active-date";
+      dateTag.innerText = surveyExists ? stageDate : `N/A`;
+      panel.insertBefore(dateTag, bodyContainer);
     } else if (stageNum === currentStageNum) {
       // Active current stage
       if (bodyContainer) bodyContainer.style.display = "block";

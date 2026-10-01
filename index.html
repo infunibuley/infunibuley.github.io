@@ -1,65 +1,438 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@400;500;600&family=Barrio&family=Barriecito&display=swap" rel="stylesheet">  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="https://infunibuley.github.io/favicon.png">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="pUbAFuxH0az2YgIVSAUA-B-KxdZc6aQfWLj4Hd0x9ZA" />
   <title>infunibuley</title>
+  
+  <link rel="icon" type="image/png" href="https://infunibuley.github.io/assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@400;500;600&family=Barrio&family=Barriecito&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
+
   <script src="scripts/load-layout.js" defer></script>
   <script src="scripts/home.js" defer></script>
-  <link rel="icon" type="image/png" href="https://infunibuley.github.io/assets/favicon.png">
+
+  <!-- Homepage-specific layout overrides -->
+  <style>
+    .home-container {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .home-intro {
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .home-intro h2 {
+      margin-bottom: 8px;
+    }
+
+    .home-intro p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.18rem;
+      line-height: 1.5;
+    }
+
+    /* Guide Callout Strip */
+    .guide-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: #1e2619;
+      border: 1px solid #2d3b25;
+      border-radius: 8px;
+      padding: 14px 20px;
+      box-sizing: border-box;
+    }
+
+    .guide-banner p {
+      margin: 0;
+      color: #dce5d7;
+      font-size: 1.05rem;
+    }
+
+    .guide-btn {
+      flex-shrink: 0;
+      display: inline-block;
+      background-color: #3b5030;
+      color: #e4eedb;
+      padding: 12px 28px;
+      border-radius: 6px;
+      border: 1px solid #5a7a4a;
+      text-decoration: none;
+      font-family: 'Advent Pro', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.75px;
+      text-transform: uppercase;
+      transition: transform 0.15s ease, opacity 0.2s ease, filter 0.15s ease;
+    }
+
+    .guide-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.15);
+    }
+
+    /* Featured Project Card */
+    .featured-project-card {
+      background: #302921;
+      border: 1px solid #4a3828;
+      border-left: 5px solid rgb(148, 115, 86);
+      border-radius: 8px;
+      padding: 24px;
+      box-sizing: border-box;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    }
+
+    .featured-project-card .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .meta-subtitle {
+      font-family: 'Barriecito', cursive, sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      color: #b5ac98;
+      text-transform: uppercase;
+    }
+
+    .featured-project-card h3 {
+      font-size: 1.85rem;
+      margin: 0 0 10px 0;
+      line-height: 1.3;
+    }
+
+    .featured-project-card .card-summary {
+      color: #b5ac98;
+      margin: 0 0 20px 0;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .card-date {
+      color: #8c826e;
+      font-size: 0.95rem;
+    }
+
+    /* Read It Button - Medium Brown Feedback Style */
+    .btn-read-it {
+      display: inline-block;
+      background-color: #382e24;
+      color: #dfd5c6;
+      padding: 12px 28px;
+      border-radius: 6px;
+      border: 1px solid #5a4734;
+      text-decoration: none;
+      font-family: 'Advent Pro', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.75px;
+      text-transform: uppercase;
+      transition: transform 0.15s ease, opacity 0.2s ease, filter 0.15s ease;
+    }
+
+    .btn-read-it:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.15);
+    }
+
+    /* Compact Survey Strip */
+    .survey-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: #24331d;
+      border: 1px solid #27381e;
+      border-left: 5px solid #44683c;
+      border-radius: 8px;
+      padding: 14px 20px;
+      box-sizing: border-box;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .survey-strip-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .status-badge {
+      font-family: 'Barriecito', cursive, sans-serif;
+      background-color: #172414;
+      border: 1px solid #36532d;
+      color: #8da47e;
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .survey-strip h3 {
+      margin: 0;
+      font-size: 1.15rem;
+      display: inline;
+    }
+
+    .survey-strip .sub-link {
+      color: #b2c9a5;
+      text-decoration: underline;
+      font-size: 0.95rem;
+      transition: color 0.15s ease;
+      text-align: right;
+    }
+
+    .survey-strip .sub-link:hover {
+      color: #e4eedb;
+    }
+
+    /* Recent Section & Project-Style Tabs */
+    .recent-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      border-bottom: 1px solid #3b3329;
+      padding-bottom: 12px;
+    }
+
+    .recent-header h3 {
+      font-size: 1.6rem;
+      margin: 0;
+      color: #dce5d7;
+    }
+
+    /* Uses .tab-btn from styles.css, adjusted for the compact header */
+    .recent-tabs {
+      display: flex;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .recent-tabs .tab-btn {
+      font-size: 1rem;
+      padding: 6px 14px;
+      margin: 0;
+    }
+
+    .stream-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: -6px;
+    }
+
+    .stream-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border-radius: 6px;
+      box-sizing: border-box;
+      text-decoration: none;
+      transition: transform 0.15s ease;
+    }
+
+    .stream-item:hover {
+      transform: translateX(4px);
+    }
+
+    .stream-item.project-type {
+      background: #252019;
+      border: 1px solid #3d3224;
+      border-left: 4px solid rgb(114, 88, 65);
+    }
+
+    .stream-item.survey-type {
+      background: #1c2617;
+      border: 1px solid #283621;
+      border-left: 4px solid #44683c;
+    }
+
+    .stream-title {
+      font-family: 'Advent Pro', sans-serif;
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: #dfd5c6;
+    }
+
+    .stream-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.95rem;
+      color: #8c826e;
+      font-family: 'Advent Pro', sans-serif;
+    }
+
+    .stream-label {
+      font-family: 'Barriecito', cursive, sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    .stream-item.project-type .stream-label {
+      color: #a89f8d;
+    }
+
+    .stream-item.survey-type .stream-label {
+      color: #8da47e;
+    }
+
+    /* Suggestion CTA Box */
+    .feedback-card {
+      background: #241f19;
+      border: 1px solid #3b3329;
+      border-radius: 8px;
+      padding: 32px 24px;
+      text-align: center;
+      margin-top: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .feedback-card h3 {
+      font-size: 1.7rem;
+      margin: 0 0 6px 0;
+      color: #e4eedb;
+    }
+
+    .feedback-card .subtext {
+      margin: 0 0 20px 0;
+    }
+
+    .feedback-card .feedback-btn {
+      margin-top: 0;
+    }
+
+    @media (max-width: 600px) {
+      .guide-banner,
+      .survey-strip {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .survey-strip .sub-link {
+        text-align: left;
+      }
+
+      .recent-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .stream-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .stream-meta {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<div>
-
   <div id="site-header"></div>
 
-  <div class="flex-container">
-    <h2>What <i>is</i> infunibuley?</h2>
-  </div>
+  <main class="home-container">
+    <!-- Intro Section -->
+    <header class="home-intro">
+      <h2>What <i>is</i> infunibuley?</h2>
+      <p>
+        Independent projects, a.k.a. touching data. Maybe someday, surveys that
+        change how we see each other.
+      </p>
+    </header>
 
-  <div class="flex-container">
-    <p>Infunibuley is a blog-ish fun site just for me to post some independent projects which some might call research, but I call touching data. My hope is that I can eventually get good enough to make surveys to find real data that changes the way we see the people around us (hopefully for the better, I'm an optimist/realist).</p>
-  </div>
+    <!-- Guide Banner -->
+    <section class="guide-banner">
+      <p>New here? Read the Guide first. It takes 2 minutes.</p>
+      <a class="guide-btn" href="https://infunibuley.github.io/pages/guide">Read the Guide</a>
+    </section>
 
-  <div class="flex-container">
-    <p>✦</p>
-    <h4 style="text-align: center;">Make sure to read the <a href="https://infunibuley.github.io/pages/guide"><u>Guide</u></a> before diving in! I wanted to feel creative so now it's just confusing :D</h4>
-  </div>
-
-  <section class="hero-banner">
-    <div class="flex-container hero-cards-container">
-      <!-- Latest Update Card -->
-      <div class="project-update update">
-        <h4>Latest Update</h4>
-        <h3>
-          <a href="#" id="latest-project-link" class="project-title-link">Loading...</a>
-        </h3>
+    <!-- Latest Update / Featured Hero Project -->
+    <article class="featured-project-card project-update">
+      <div class="card-meta">
+        <span class="meta-subtitle" id="latest-project-series">Latest Project</span>
         <span id="latest-project-tag" class="tag tag-mind-works">Loading...</span>
       </div>
 
-      <!-- Latest Survey Card -->
-      <div id="latest-survey-card" class="survey-update update">
-        <h4>Latest Survey</h4>
+      <h3>
+        <a href="#" id="latest-project-link" class="project-title-link">Loading...</a>
+      </h3>
+
+      <p class="card-summary" id="latest-project-desc">
+        Loading project summary...
+      </p>
+
+      <div class="card-footer">
+        <a id="latest-project-btn" class="btn-read-it" href="https://infunibuley.github.io/pages/projects">Read It</a>
+        <span class="card-date" id="latest-project-date"></span>
+      </div>
+    </article>
+
+    <!-- Latest Survey Notification Strip -->
+    <article id="latest-survey-card" class="survey-strip survey-update">
+      <div class="survey-strip-left">
+        <span id="latest-survey-tag" class="status-badge">Survey</span>
         <h3>
           <a href="#" id="latest-survey-link" class="project-title-link">Loading...</a>
         </h3>
-        <span id="latest-survey-tag" class="tag tag-your-sticks">Loading...</span>
-      </div> 
-    </div>
-  </section>
+      </div>
+      <a href="https://infunibuley.github.io/pages/contact" class="sub-link">
+        Leave an idea, I love to read them :)
+      </a>
+    </article>
 
-  <div class="flex-container">
-    <a class="survey-start-btn" href="https://infunibuley.github.io/pages/contact">Give me a piece of your mind!</a>
-    <p>(It's a suggestion box, not surgery, dw)</p>
-  </div>
+    <!-- Recent Dynamic Feed -->
+    <section class="recent-section">
+      <div class="recent-header">
+        <h3>Recent</h3>
+        <div class="recent-tabs" id="recent-filter-pills">
+          <button class="tab-btn active" data-filter="projects">Projects</button>
+          <button class="tab-btn" data-filter="surveys">Surveys</button>
+        </div>
+      </div>
 
-<div id="site-footer"></div>
+      <div class="stream-feed" id="stream-feed-container">
+        <div class="stream-item project-type">
+          <span class="stream-title">Loading recent updates...</span>
+        </div>
+      </div>
+    </section>
 
-</div>
+    <!-- Suggestion CTA Box -->
+    <section class="feedback-card">
+      <h3>Got an idea?</h3>
+      <p class="subtext">(It's a suggestion box, not surgery, dw)</p>
+      <a class="feedback-btn" href="https://infunibuley.github.io/pages/contact">
+        Give me a piece of your mind!
+      </a>
+    </section>
+  </main>
 
+  <div id="site-footer"></div>
 </body>
 </html>
