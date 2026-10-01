@@ -8,9 +8,11 @@ const STAGE_CONFIG = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  setupTabClickHandlers();
+  setupStepperClickHandlers();
+  setupScrollSpy();
+  setupScrollToTop();
 
-  // Reset tab scroll container to the left edge
+  // Reset horizontal scroll of stepper to start
   const tabContainer = document.querySelector(".tab-container");
   if (tabContainer) {
     tabContainer.scrollLeft = 0;
@@ -41,21 +43,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (project) {
         setupProjectStages(project);
-        // Pass the project object so markdown parsing can check for "N/A" surveys
         loadProjectMarkdown(projectId, project);
       } else {
-        activateDefaultTab();
         loadProjectMarkdown(projectId, null);
       }
     })
     .catch((err) => {
       console.warn("Error initializing project:", err);
-      activateDefaultTab();
       loadProjectMarkdown(projectId, null);
     });
 });
 
-// Fetches and parses the markdown file, passing along project metadata
+// Fetches and parses the markdown file
 function loadProjectMarkdown(projectId, project) {
   const mdUrl = `../data/projects/${projectId}/${projectId}.md`;
 
@@ -86,18 +85,18 @@ function parseAndPopulateMarkdown(markdown, projectId, project) {
     if (titleEl) titleEl.textContent = titleText;
   }
 
-  // 2. Dynamic link to the specific project folder in the GitHub repo
+  // 2. Dynamic link to project folder
   const folderLink = document.getElementById("project-folder-link");
   if (folderLink) {
     folderLink.href = `${GITHUB_TREE}/data/projects/${projectId}/${projectId}.md`;
   }
 
-  // Check if Stage 3 has a valid survey (i.e. date is not "N/A")
+  // Check if Stage 3 has a valid survey
   const stage3Config = STAGE_CONFIG[3];
   const stage3Date = (project && stage3Config && project[stage3Config.key]) || "TBD";
   const stage3HasSurvey = stage3Date !== "N/A";
 
-  // 3. Setup Stage 3 dynamic survey components only if survey exists
+  // 3. Setup Stage 3 dynamic survey components
   if (stage3HasSurvey) {
     const surveyUrl = `https://infunibuley.github.io/pages/survey?id=${projectId}`;
     const surveyActionLink = document.getElementById("survey-action-link");
@@ -121,7 +120,6 @@ function parseAndPopulateMarkdown(markdown, projectId, project) {
 
     if (!bodyEl) continue;
 
-    // Convert markdown content to HTML
     let parsedHtml = "";
     if (rawContent && rawContent.toUpperCase() !== "N/A") {
       parsedHtml = typeof marked !== "undefined" ? marked.parse(rawContent) : `<p>${rawContent}</p>`;
@@ -129,10 +127,9 @@ function parseAndPopulateMarkdown(markdown, projectId, project) {
       parsedHtml = "<p>No notes written for this stage yet.</p>";
     }
 
-    // Stage 4: Inject Jupyter Notebook GitHub View Link
+    // Stage 4: Inject Jupyter Notebook View Link
     if (i === 4) {
       const notebookGithubUrl = `${GITHUB_BASE}/data/projects/${projectId}/${projectId}.ipynb`;
-      
       const notebookCallout = `
         <div class="notebook-action-card" style="margin-bottom: 20px; padding: 14px 18px; border: 1px dashed #3b3329; border-radius: 6px; background-color: rgba(0, 0, 0, 0.15);">
           <p style="margin: 0 0 10px 0; font-size: 0.95rem; color: #d4cebe;">Interactive code, statistical charts, and analysis models are available in the Jupyter Notebook.</p>
@@ -141,20 +138,18 @@ function parseAndPopulateMarkdown(markdown, projectId, project) {
           </a>
         </div>
       `;
-
       bodyEl.innerHTML = notebookCallout + parsedHtml;
       continue;
     }
 
-    // Stage 3: Handle survey card visibility
+    // Stage 3: Survey card handling
     if (i === 3) {
       const surveyCard = bodyEl.querySelector(".survey-action-card");
       bodyEl.innerHTML = parsedHtml;
-      
+
       if (stage3HasSurvey) {
         if (surveyCard) bodyEl.appendChild(surveyCard);
       } else {
-        // Remove the survey container completely if no survey exists for this project
         if (surveyCard) surveyCard.remove();
       }
       continue;
@@ -164,72 +159,62 @@ function parseAndPopulateMarkdown(markdown, projectId, project) {
   }
 }
 
-// Stage lock and date indicators
+// Stage lock and date indicators across the single page
 function setupProjectStages(project) {
   const currentStageNum = Number(project.stage) || 1;
-  const tabButtons = document.querySelectorAll(".tab-btn");
-  const tabContents = document.querySelectorAll(".tab-content");
+  const sections = document.querySelectorAll(".stage-section");
 
-  tabContents.forEach((panel) => {
+  sections.forEach((panel) => {
+    // 1. Force the section container to stretch full 100% of its available column width
+    panel.style.width = "100%";
+    panel.style.boxSizing = "border-box";
+
+    // 2. Force the section header to strictly align left
+    const heading = panel.querySelector("h4");
+    if (heading) {
+      heading.style.textAlign = "left";
+      heading.style.width = "100%";
+      heading.style.margin = "0 0 6px 0";
+    }
+
     const stageNum = Number(panel.getAttribute("data-stage"));
     const stageInfo = STAGE_CONFIG[stageNum];
     const stageDate = (stageInfo && project[stageInfo.key]) || "TBD";
     const surveyExists = stageDate !== "N/A";
     const bodyContainer = panel.querySelector(".stage-body");
 
-    // Remove previously injected status elements
+    // Remove old injected elements if re-running
     panel.querySelectorAll(".stage-status-msg, .future-lock-box").forEach((el) => el.remove());
 
-if (stageNum < currentStageNum) {
-      // Previous stages
+    if (stageNum <= currentStageNum) {
+      // Completed or current active stage
       if (bodyContainer) bodyContainer.style.display = "block";
       const dateTag = document.createElement("p");
-      dateTag.className = "stage-status-msg completed-date";
-      dateTag.innerText = stageDate;
+      dateTag.className = "stage-status-msg active-date";
+      dateTag.style.textAlign = "left";
+      dateTag.innerText = surveyExists ? stageDate : "N/A";
       panel.insertBefore(dateTag, bodyContainer);
 
-    } else if (stageNum === currentStageNum) {
-      // Active current stage
-      if (bodyContainer) bodyContainer.style.display = "block";
-
-      if (!surveyExists) {
+      if (stageNum === 3 && !surveyExists) {
         const noSurveyMsg = document.createElement("div");
         noSurveyMsg.className = "future-lock-box";
+        noSurveyMsg.style.width = "100%";
+        noSurveyMsg.style.boxSizing = "border-box";
         noSurveyMsg.innerHTML = `
           <p class="lock-icon">✦</p>
           <p class="lock-text">There is no survey for this project.</p>
         `;
         panel.appendChild(noSurveyMsg);
       }
-
-      const dateTag = document.createElement("p");
-      dateTag.className = "stage-status-msg active-date";
-      dateTag.innerText = surveyExists ? stageDate : `N/A`;
-      panel.insertBefore(dateTag, bodyContainer);
-    } else if (stageNum === currentStageNum) {
-      // Active current stage
-      if (bodyContainer) bodyContainer.style.display = "block";
-
-      if (!surveyExists) {
-        const noSurveyMsg = document.createElement("div");
-        noSurveyMsg.className = "future-lock-box";
-        noSurveyMsg.innerHTML = `
-          <p class="lock-icon">✦</p>
-          <p class="lock-text">There is no survey for this project.</p>
-        `;
-        panel.appendChild(noSurveyMsg);
-      }
-
-      const dateTag = document.createElement("p");
-      dateTag.className = "stage-status-msg active-date";
-      dateTag.innerText = surveyExists ? `Posted on ${stageDate}` : `Status: N/A`;
-      panel.insertBefore(dateTag, bodyContainer);
-
     } else {
       // Future stage locked overlay
       if (bodyContainer) bodyContainer.style.display = "none";
       const lockMsg = document.createElement("div");
       lockMsg.className = "future-lock-box";
+      // Force lock box to span the full width of the parent column
+      lockMsg.style.width = "100%";
+      lockMsg.style.boxSizing = "border-box";
+      lockMsg.style.display = "block";
 
       if (surveyExists) {
         lockMsg.innerHTML = `
@@ -239,61 +224,58 @@ if (stageNum < currentStageNum) {
       } else {
         lockMsg.innerHTML = `
           <p class="lock-icon">✦</p>
-          <p class="lock-text">No survey planned for this stage.</p>
+          <p class="lock-text">No survey planned for this project.</p>
         `;
       }
       panel.appendChild(lockMsg);
     }
   });
-
-  // Always force-start on Stage 1 on load
-  const initialStage = 1;
-  tabButtons.forEach((btn) => {
-    const btnStageNum = Number(btn.getAttribute("data-stage"));
-    if (btnStageNum === initialStage) {
-      btn.classList.add("active");
-      const targetId = btn.getAttribute("data-target");
-      const targetContent = document.getElementById(targetId);
-      if (targetContent) targetContent.classList.add("active");
-    } else {
-      btn.classList.remove("active");
-    }
-  });
-
-  // Ensure other panels lose the active class
-  tabContents.forEach((panel) => {
-    if (Number(panel.getAttribute("data-stage")) !== initialStage) {
-      panel.classList.remove("active");
-    }
-  });
 }
 
-function setupTabClickHandlers() {
-  const tabButtons = document.querySelectorAll(".tab-btn");
-  const tabContents = document.querySelectorAll(".tab-content");
-
-  tabButtons.forEach((btn) => {
+// Jump anchor clicks on the stepper bar
+function setupStepperClickHandlers() {
+  const stepButtons = document.querySelectorAll(".step-btn");
+  stepButtons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      const clickedBtn = e.currentTarget;
-      const targetId = clickedBtn.getAttribute("data-target");
+      e.preventDefault();
+      const targetId = btn.getAttribute("data-target");
+      const targetEl = document.getElementById(targetId);
 
-      tabButtons.forEach((b) => b.classList.remove("active"));
-      tabContents.forEach((c) => c.classList.remove("active"));
-
-      clickedBtn.classList.add("active");
-      const targetContent = document.getElementById(targetId);
-      if (targetContent) {
-        targetContent.classList.add("active");
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: "smooth" });
+        stepButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
       }
     });
   });
 }
 
-function activateDefaultTab() {
-  const firstBtn = document.querySelector(".tab-btn");
-  const firstContent = document.querySelector(".tab-content");
-  if (firstBtn) firstBtn.classList.add("active");
-  if (firstContent) firstContent.classList.add("active");
+// ScrollSpy: highlight stepper button based on scroll position
+function setupScrollSpy() {
+  const sections = document.querySelectorAll(".stage-section");
+  const stepButtons = document.querySelectorAll(".step-btn");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute("id");
+          stepButtons.forEach((btn) => {
+            if (btn.getAttribute("data-target") === id) {
+              btn.classList.add("active");
+            } else {
+              btn.classList.remove("active");
+            }
+          });
+        }
+      });
+    },
+    {
+      rootMargin: "-20% 0px -70% 0px"
+    }
+  );
+
+  sections.forEach((sec) => observer.observe(sec));
 }
 
 function copySurveyLink() {
@@ -307,5 +289,24 @@ function copySurveyLink() {
         feedback.style.display = "none";
       }, 2000);
     }
+  });
+}
+
+function setupScrollToTop() {
+  const scrollBtn = document.getElementById("scroll-to-top");
+  if (!scrollBtn) return;
+
+  // Show/hide button based on scroll distance
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      scrollBtn.classList.add("visible");
+    } else {
+      scrollBtn.classList.remove("visible");
+    }
+  });
+
+  // Smooth scroll back to page top
+  scrollBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }

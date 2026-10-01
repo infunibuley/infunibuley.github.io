@@ -16,7 +16,6 @@
 
 <body>
 <div>
-
   <div id="site-header"></div>
 
   <div class="flex-container">
@@ -25,93 +24,92 @@
 
   <div class="flex-container">
     <p class="repo-link-wrap">
-    <a id="project-folder-link" href="#" target="_blank" rel="noopener noreferrer" style="color: #8da47e; font-size: 0.95rem; text-decoration: underline;">
-      View Project Files on github
-    </a>
+      <a id="project-folder-link" href="#" target="_blank" rel="noopener noreferrer" style="color: #8da47e; font-size: 0.95rem; text-decoration: underline;">
+        View Project Files on github
+      </a>
     </p>
   </div>
   
-  <!-- 5 Stage Tabs (Numeric 1-5 with New Names) -->
-  <div class="tab-container">
-    <button class="tab-btn" data-stage="1" data-target="mind-works">1. Napkin Blueprints</button>
-    <button class="tab-btn" data-stage="2" data-target="the-gears">2. Ancient Scrolls</button>
-    <button class="tab-btn" data-stage="3" data-target="your-sticks">3. Calling all Echoes</button>
-    <button class="tab-btn" data-stage="4" data-target="fancy-stuff">4. Cranking the Dials</button>
-    <button class="tab-btn" data-stage="5" data-target="complete">5. The Final Verdict</button>
-  </div>
-
-  <!-- Stage 1 Panel: Napkin Blueprints -->
-  <div id="mind-works" class="content-container tab-content" data-stage="1">
-    <h4>1. Napkin Blueprints</h4>
-    <div class="stage-body" id="stage-body-1">
+  <!-- Sticky Progress Stepper (Jump Navigation) -->
+  <nav class="project-stepper-wrap">
+    <div class="tab-container stepper-bar">
+      <button class="tab-btn step-btn active" data-stage="1" data-target="mind-works">1. Napkin Blueprints</button>
+      <button class="tab-btn step-btn" data-stage="2" data-target="the-gears">2. Ancient Scrolls</button>
+      <button class="tab-btn step-btn" data-stage="3" data-target="your-sticks">3. Calling all Echoes</button>
+      <button class="tab-btn step-btn" data-stage="4" data-target="fancy-stuff">4. Cranking the Dials</button>
+      <button class="tab-btn step-btn" data-stage="5" data-target="complete">5. The Final Verdict</button>
     </div>
-  </div>
+  </nav>
 
-  <!-- Stage 2 Panel: Ancient Scrolls -->
-  <div id="the-gears" class="content-container tab-content" data-stage="2">
-    <h4>2. Ancient Scrolls</h4>
-    <div class="stage-body" id="stage-body-2">
-    </div>
-  </div>
+  <!-- Continuous Single Page Content Feed -->
+  <div class="project-stages-flow">
+    <!-- Stage 1: Napkin Blueprints -->
+    <section id="mind-works" class="content-container stage-section" data-stage="1">
+      <h4>1. Napkin Blueprints</h4>
+      <div class="stage-body" id="stage-body-1"></div>
+    </section>
 
-  <!-- Stage 3 Panel: Calling all Echoes (Survey Action) -->
-  <div id="your-sticks" class="content-container tab-content" data-stage="3">
-    <h4>3. Calling all Echoes</h4>
-    <div class="stage-body" id="stage-body-3">
-      <p>Share your thoughts. <br>Fill out the survey or share it with someone who has strong opinions :)</p>
+    <!-- Stage 2: Ancient Scrolls -->
+    <section id="the-gears" class="content-container stage-section" data-stage="2">
+      <h4>2. Ancient Scrolls</h4>
+      <div class="stage-body" id="stage-body-2"></div>
+    </section>
 
-      <div class="survey-action-card">
-        <a href="#" id="survey-action-link" class="survey-start-btn">
-          Take the Survey
-        </a>
+    <!-- Stage 3: Calling all Echoes (Survey Action) -->
+    <section id="your-sticks" class="content-container stage-section" data-stage="3">
+      <h4>3. Calling all Echoes</h4>
+      <div class="stage-body" id="stage-body-3">
+        <p>Share your thoughts. <br>Fill out the survey or share it with someone who has strong opinions :)</p>
 
-        <div class="share-box">
-          <div class="share-link-group">
-            <input 
-              type="text" 
-              id="survey-link-input" 
-              value="" 
-              readonly
-            >
-            <button id="copy-btn" class="copy-btn" onclick="copySurveyLink()">Copy Link</button>
-          </div>
-          <p id="copy-feedback" class="copy-feedback">Copied to clipboard!</p>
+        <div class="survey-action-card">
+          <a href="#" id="survey-action-link" class="survey-start-btn">
+            Take the Survey
+          </a>
 
-          <div class="qr-container">
-            <img 
-              id="survey-qr-img"
-              src="" 
-              alt="Survey QR Code" 
-              class="survey-qr"
-            >
-            <span class="qr-caption">Scan to share or take on mobile</span>
+          <div class="share-box">
+            <div class="share-link-group">
+              <input 
+                type="text" 
+                id="survey-link-input" 
+                value="" 
+                readonly
+              >
+              <button id="copy-btn" class="copy-btn" onclick="copySurveyLink()">Copy Link</button>
+            </div>
+            <p id="copy-feedback" class="copy-feedback">Copied to clipboard!</p>
+
+            <div class="qr-container">
+              <img 
+                id="survey-qr-img" 
+                src="" 
+                alt="Survey QR Code" 
+                class="survey-qr"
+              >
+              <span class="qr-caption">Scan to share or take on mobile</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Stage 4: Cranking the Dials -->
+    <section id="fancy-stuff" class="content-container stage-section" data-stage="4">
+      <h4>4. Cranking the Dials</h4>
+      <div class="stage-body" id="stage-body-4"></div>
+    </section>
+
+    <!-- Stage 5: The Final Verdict -->
+    <section id="complete" class="content-container stage-section" data-stage="5">
+      <h4>5. The Final Verdict</h4>
+      <div class="stage-body" id="stage-body-5"></div>
+    </section>
   </div>
 
-  <!-- Stage 4 Panel: Cranking the Dials -->
-  <div id="fancy-stuff" class="content-container tab-content" data-stage="4">
-    <h4>4. Cranking the Dials</h4>
-    <div class="stage-body" id="stage-body-4">
-    </div>
-  </div>
+  <button id="scroll-to-top" class="scroll-top-btn" title="Back to top" aria-label="Back to top">
+    ⇪
+  </button>
 
-  <!-- Stage 5 Panel: The Final Verdict -->
-  <div id="complete" class="content-container tab-content" data-stage="5">
-    <h4>5. The Final Verdict</h4>
-    <div class="stage-body" id="stage-body-5">
-    </div>
-  </div>
-
-  <footer class="footer">
-    <div class="footer-links">
-      <a href="https://instagram.com/infunibuley" target="_blank">Instagram</a>
-      <a href="https://substack.com/@infunibuley" target="_blank">Substack</a>
-      <a href="https://github.com/infunibuley" target="_blank">GitHub</a>
-    </div>
-  </footer>
+  <div id="site-footer"></div>
 
 </div>
 </body>
