@@ -28,5 +28,5 @@ N/A (would preferably be an embedded survey + link to official website survey pa
 ## 4. Cranking the Dials
 Coming Eventually! (will link to the jupyter notebook)
 
-## 5. The Final Vertict
+## 5. The Final Verdict
 Coming Eventually! 

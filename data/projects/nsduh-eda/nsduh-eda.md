@@ -25,10 +25,10 @@ What's the gap between needing help vs. actually receiving it across different r
 Disparities in marginalized communities:
 - What is the sample size for different respondent groups in that year's dataset?
 - If sample sizes allow, are there any unique mental health hurdles sexual and gender minority groups face compared to general population baselines? 
-- Are queer people able to access affirming mental health support at the same rate, or are there massive barriers in treatment? What about different cultures? Genders (mostly looking at men)? 
+- Are queer people able to access affirming mental health support at the same rate? Are there massive barriers in treatment? What about different cultures? Genders (mostly looking at men)? 
 
 Age & Substance use:
-- Are younger people more proactive about getting therapy? Are older? Is there an age group that is at all? 
+- Are younger people more proactive about getting therapy? Are they older? Is there an age group that is at all? 
 - Generational differences in substance use vs. abuse patterns?
 - Correlations between socio-economic stressors and substances as a coping mechanism?
 
@@ -118,7 +118,7 @@ idk this is a fun dataset
 
 **LGBTQIA+ Distribution:**
 
-*Jones, J. M. (2024, March 13). LGBTQ+ Identification in U.S. Now at 7.6%. Gallup. https://news.gallup.com/poll/611864/lgbtq-identification-adults-up.aspx*
+*Jones, J. M. (2024, March 13). LGBTQ+ Identification in the U.S. Now at 7.6%. Gallup. https://news.gallup.com/poll/611864/lgbtq-identification-adults-up.aspx*
 
 LGBTQ+ Identity Among U.S. Adults and LGBTQ+ Adults, 2024
 
@@ -150,21 +150,21 @@ U.S. Adults' Self-Identification as LGBTQ+, by Age
 
 *Note: The data is not stored anywhere in this git repository since it is too large. If you would like access to the data, go to the site above. The dataset is public access and I am using the 2025 tab delimited data.*
 
-All of the Data by SAMHSA is open source. If you go to the github folder and open the path 'about the data (by SAMHSA)' or the website above, it will have the codebook, user manual, and the questionaires that respondents filled out. 
+All SAMHSA data is open source. If you go to the github folder and open the path 'about the data (by SAMHSA)' or the website above, it will have the codebook, user manual, and the questionnaires that respondents filled out. 
 
 I am using the 2024 dataset which is the most recent publicly available dataset. The data is collected through in-person interviews in people's homes and web-based interviews of people 12 years and older. A limitation of this dataset is that it doesn't include people experiencing homelessness who are not in shelters, active military personnel, and residents of jails, nursing homes, mental institutions, and long-term care hospitals. 
 
-The data has been deidentified before being made publicly to protect the confidentiality of the respondents. 
+The data has been deidentified before being made public to protect respondents' privacy. 
 
 SAMHSA has annual reports, the most recent one published is a 2025 report with infographics, detailed tables, etc. 
 
-Another possible limitation I'm seeing while looking through the codebook is that many of the subjective range based questions (Such as questions asking about the level of difficulty in performing a task such as seeing, hearing, remember, etc.) only have 3 possible answers: no difficulty, some difficulty, and a lot of difficulty or cannot do at all. This is very subjective data and has a very small range of allowance and does not separate lot of difficulty to cannot do at all. 
+Another possible limitation I'm seeing while looking through the codebook is that many of the subjective range based questions (Such as questions asking about the level of difficulty in performing a task such as seeing, hearing, remember, etc.) only have 3 possible answers: no difficulty, some difficulty, and a lot of difficulty or cannot do at all. This is very subjective data and has a very small range of allowance and does not separate a lot of difficulty to cannot do at all. 
 
-I also do wonder if there was any level of fatigue by the end of this questionaire (probably was) and how that might have affected the responses.
+I also wonder if there was any level of fatigue by the end of this questionnaire (probably was) and how that might have affected the responses.
 
-I also wonder if there was any extent of bias in responses based on discomfort. The information the respondents are giving are incredibly personal details, even though its on paper and is not going to be linked to that person at all in the end. There is the chance that people who are against seeing mental health guidance or either give incorrect responses or simply don't participate. 
+I also wonder if there was any extent of bias in responses based on discomfort. The information the respondents are giving are incredibly personal details, even though it's on paper and is not going to be linked to that person at all in the end. There is the chance that people who are against seeing mental health guidance or either give incorrect responses or simply don't participate. 
 
-Another possible limitation is that the data was collected all at once, which means that there could be bias about past experiences or general forgetfulness over the past. 
+Another possible limitation is that the data was collected all at once, meaning there could be bias about past experiences or general forgetfulness over the past. 
 
 I also do find it interesting that the dataset doesn't include measures of neurodiversity, although it does include a question on disability. 
 
@@ -172,7 +172,7 @@ This survey also doesn't in any way determine causation versus correlation so de
 
 <br>
 
-#### Questionairre Resources
+#### Questionnaire Resources
 
 *SAMHSA Center for Behavioral Health Statistics and Quality (no date) 2025 National Survey on Drug Use and Health (NSDUH):Methodological Summary and Definitions, 2025 National Survey on Drug Use and Health (NSDUH): Methodological Summary and Definitions. Available at: https://www.samhsa.gov/data/sites/default/files/reports/rpt57377/2025-nsduh-method-summary-defs/2025-nsduh-method-summary-defs.htm#2-2 (Accessed: 24 September 2026).*
 
@@ -200,7 +200,7 @@ I do believe in the dataset, the responses are scored and we are not given the i
 
 Because I am most interested in mental health rather than substance abuse, I'm not including many mentions of substance abuse and access measures, but all of the information is also available on the SAMHSA documents. 
 
-Also please do not take the snippits I added as if it is a comprehensive summary of the document. There is so much more in that document, I only took what I could see and thought was most interesting. 
+Also please do not take the snippets I added as if it is a comprehensive summary of the document. There is so much more in that document, I only took what I could see and thought was most interesting. 
 
 <br>
 
@@ -240,5 +240,5 @@ N/A
 ## 4. Cranking the Dials
 N/A
 
-## 5. The Final Vertict
+## 5. The Final Verdict
 N/A

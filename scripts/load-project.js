@@ -81,7 +81,7 @@ function parseAndPopulateMarkdown(markdown, projectId, project) {
   const titleMatch = markdown.match(/^#\s+(.+)$/m);
   if (titleMatch) {
     const titleText = titleMatch[1].trim();
-    document.title = `${titleText} — infunibuley`;
+    document.title = `${titleText} | infunibuley`;
     const titleEl = document.getElementById("project-header-title");
     if (titleEl) titleEl.textContent = titleText;
   }
