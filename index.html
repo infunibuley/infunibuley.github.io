@@ -12,6 +12,7 @@
 
   <script src="scripts/load-layout.js" defer></script>
   <script src="scripts/home.js" defer></script>
+  <script src="https://tally.so/widgets/embed.js" defer></script>
 
   <!-- Homepage-specific layout overrides -->
   <style>
@@ -431,6 +432,39 @@
         Give me a piece of your mind!
       </a>
     </section>
+
+    <section class="flex-container" style="
+      width: 100%; 
+      background: #1e2619;
+      border: 1px solid #2d3b25;
+      border-radius: 8px;
+      padding: 14px 20px;
+      box-sizing: border-box;
+">
+      <h3>Join the Mailing List</h3>
+      <p>For updates on ongoing or new projects!</p>
+
+      <form id="substack-form" class="form-group" style="display: flex; flex-direction: column; gap: 10px;">
+        <input 
+          type="email" 
+          id="substack-email" 
+          name="email" 
+          placeholder="Enter your email" 
+          required />
+
+        <p style="font-size: small;">By subscribing, you confirm you are 16+ and agree to receive updates processed via Substack. Read our <a href="infunibuley.github.io/pages/guide"><u>Privacy & Transparency Guide</u></a> and <a href="https://substack.com/tos"><u>Substack's Terms.</u></a></p>
+          
+        <button type="submit" id="substack-btn" class="guide-btn">
+          Subscribe
+        </button>
+        
+        <p id="substack-message" style="margin: 0; font-size: 0.85rem; display: none;"></p>
+        <a href="https://infunibuley.substack.com/account" style="font-size: small;"><u>Unsubscribe here.</u></a>
+
+      </form>
+
+    </section>
+
   </main>
 
   <div id="site-footer"></div>

@@ -199,3 +199,44 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch((err) => console.error("Error loading home updates:", err));
 });
+
+const form = document.getElementById('substack-form');
+const emailInput = document.getElementById('substack-email');
+const btn = document.getElementById('substack-btn');
+const msg = document.getElementById('substack-message');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  btn.disabled = true;
+  btn.innerText = 'Subscribing...';
+  msg.style.display = 'none';
+
+  try {
+    const response = await fetch('https://infunibuley.substack.com/api/v1/free', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: emailInput.value,
+        first_url: window.location.href,
+        first_referrer: document.referrer
+      }),
+    });
+
+    if (response.ok) {
+      msg.textContent = 'Thanks for subscribing! Check your email to confirm.';
+      msg.style.color = '#7bc676';
+      msg.style.display = 'block';
+      form.reset();
+    } else {
+      throw new Error('Subscription failed');
+    }
+  } catch (err) {
+    // If Substack blocks the direct API call (CORS or bot check), fallback to direct page
+    window.open(`https://infunibuley.substack.com/subscribe?email=${encodeURIComponent(emailInput.value)}`, '_blank');
+  } finally {
+    btn.disabled = false;
+    btn.innerText = 'Subscribe';
+  }
+});
