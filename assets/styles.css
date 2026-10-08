@@ -83,6 +83,10 @@ li {
   margin: 6px 0; /* <-- This is giving only 6px vertical space */
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
 .subtext {
   font-size: 0.95rem;
   color: #8c826e;
