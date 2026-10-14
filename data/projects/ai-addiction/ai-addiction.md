@@ -8,8 +8,10 @@ How do we really use AI? Is it useful, or is it an addiction?
 
 - [1. Napkin Blueprints](#1-napkin-blueprints)
 - [2. Ancient Scrolls](#2-ancient-scrolls)
-  - [Literature Review](#literature-review)
-  - [References](#references)
+  - [My Process of Reading](#my-process-of-reading)
+  - [Human-AI Decision-Making & Cognitive Biases](#human-ai-decision-making--cognitive-biases)
+  - [Cognitive Costs, Fatigue, & Impact on Human Skills](#cognitive-costs-fatigue--impact-on-human-skills)
+  - [Other Data or Concerns with the Survey](#other-data-or-concerns-with-the-survey)
 - [3. Calling All Echoes](#3-calling-all-echoes)
 - [4. Cranking the Dials](#4-cranking-the-dials)
 - [5. The Final Verdict](#5-the-final-verdict)
@@ -48,6 +50,8 @@ Small Note:
 If you want to skip the literature reviews, at the end of this section, I'll have a short summary on all of the most important notes I found throughout the readings and how I might incorporate the new knowledge into the survey or the analysis. 
 Or you can always skip straight to the survey (if it is out). 
 
+<br>
+
 ### My process of reading: 
 
 To gather potential research articles I first went onto google scholar and looked for 'ai addiction', 'ai on cognitive skills', 'ai and human psychology', etc., looking for titles that seemed to be on topic or articles that might expand my understanding of AI and the usage of AI and concerns. I mostly looked for articles after 2022 because ChatGPT first came out in November 2022 (Foote, 2025), however, I do realize that many research articles cite other research from before 2022. I did keep these and a few older research articles out of curiosity of how the concerns about AI were before the huge AI boom. 
@@ -65,6 +69,8 @@ I also decided to look at blog-like posts about AI addiction. I realized just no
 *The AI Addiction Center (2026) The irony of using AI to understand why AI is addictive, The AI Addiction Center. Available at: https://theaiaddictioncenter.com/category/blog/.*
 
 *Yash Katolkar (2024) Unplugged: The psychological toll of our AI addiction, Medium. Available at: https://medium.com/@yashhh347/unplugged-the-psychological-toll-of-our-ai-addiction-7a155d47516b.*
+
+<br>
 
 ### Human-AI Decision-Making & Cognitive Biases
 
@@ -95,6 +101,8 @@ Before this reading, I hadn't exactly considered the difference in decisions bet
 Related: 
 
 Campbell, H., Goldman, S. and Markey, P.M. (2025) “Artificial intelligence and human decision making: Exploring similarities in cognitive bias,” Computers in Human Behavior: Artificial Humans, 4, p. 100138. Available at: https://doi.org/10.1016/j.chbah.2025.100138.
+
+<br>
 
 ### Cognitive Costs, Fatigue, & Impact on Human Skills
 
@@ -146,6 +154,8 @@ Related:
 
 - structured online survey that "assessed participant’s AI anxiety, AI attitude, cognitive skills, decision fatigue, and trust (encompassing reliability, productivity, and user control)"
 
+<br>
+
 ### Other Data or Concerns with the Survey
 
 *Moore, O. (2026) The Top 100 Gen AI Consumer Apps — 6th Edition, Andreessen Horowitz. Available at: https://a16z.com/100-gen-ai-apps-6/ (Accessed: October 6, 2026).*
@@ -174,7 +184,7 @@ Miniquiz -
 I'm probably also going to take a CITI course (I've already taken a couple courses for trying to get MIMIC-IV access, still working on that.) 
 
 ## 3. Calling All Echoes
-N/A (would preferably be an embedded survey + link to official website survey page)
+Coming Eventually! (would preferably be an embedded survey + link to official website survey page)
 
 ## 4. Cranking the Dials
 Coming Eventually! (will link to the jupyter notebook)

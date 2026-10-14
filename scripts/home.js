@@ -24,6 +24,16 @@ document.addEventListener("DOMContentLoaded", () => {
         return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
       };
 
+      // Helper: get the timestamp corresponding to the project's current active stage
+      const getItemTimestamp = (item) => {
+        const stageNum = Number(item.stage) || 1;
+        const stageKey = STAGE_CONFIG[stageNum] ? STAGE_CONFIG[stageNum].key : null;
+        const dateStr = (stageKey && item[stageKey]) || item.date;
+        if (!dateStr || dateStr === "TBD" || dateStr === "N/A") return 0;
+        const time = new Date(dateStr).getTime();
+        return isNaN(time) ? 0 : time;
+      };
+
       // Helper to check if a project has an active, valid survey
       const isValidSurvey = (p) => {
         const stageNum = Number(p.stage);
@@ -36,11 +46,13 @@ document.addEventListener("DOMContentLoaded", () => {
         );
       };
 
-      // 1. POPULATE HERO (LATEST / EARLIEST ACTIVE PROJECT)
-      const sortedByEarliest = [...projects].sort(
-        (a, b) => (Number(a.stage) || 99) - (Number(b.stage) || 99)
+      // Sort all projects by latest active stage timestamp (newest first)
+      const sortedProjects = [...projects].sort(
+        (a, b) => getItemTimestamp(b) - getItemTimestamp(a)
       );
-      const latestProject = sortedByEarliest[0];
+
+      // 1. POPULATE HERO WITH THE MOST RECENTLY UPDATED PROJECT
+      const latestProject = sortedProjects[0];
 
       if (latestProject) {
         const stageNum = Number(latestProject.stage) || 1;
@@ -67,7 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
           projDesc.textContent = latestProject.summary || latestProject.description;
         }
 
-        // Get date from stage key or general date
         const rawDate = latestProject[config.key] || latestProject.date;
         if (projDate && rawDate) {
           projDate.textContent = formatDate(rawDate);
@@ -81,50 +92,36 @@ document.addEventListener("DOMContentLoaded", () => {
       const surveyCard = document.getElementById("latest-survey-card");
       const activeSurvey = projects.find(isValidSurvey);
 
-      if (activeSurvey) {
-        const config = STAGE_CONFIG[3];
-        const surveyLink = document.getElementById("latest-survey-link");
-        const surveyTag = document.getElementById("latest-survey-tag");
+      if (surveyCard) {
+        if (activeSurvey) {
+          const config = STAGE_CONFIG[3];
+          const surveyLink = document.getElementById("latest-survey-link");
+          const surveyTag = document.getElementById("latest-survey-tag");
 
-        if (surveyLink) {
-          surveyLink.textContent = activeSurvey.title;
-          surveyLink.href = `https://infunibuley.github.io/pages/survey.html?id=${activeSurvey.id}`;
+          if (surveyLink) {
+            surveyLink.textContent = activeSurvey.title;
+            surveyLink.href = `https://infunibuley.github.io/pages/survey.html?id=${activeSurvey.id}`;
+          }
+          if (surveyTag) {
+            surveyTag.textContent = "Live Survey";
+            surveyTag.className = `status-badge ${config.cssClass}`;
+          }
+        } else {
+          surveyCard.innerHTML = `
+            <div class="survey-strip-left">
+              <span class="status-badge">Closed</span>
+              <h3 style="margin:0; font-size:1.15rem; color:#b2c9a5;">All Echoes Quiet</h3>
+              <span style="font-size:0.95rem; color:#8c826e;">No surveys open right now.</span>
+            </div>
+            <a href="https://infunibuley.github.io/pages/contact" class="sub-link">
+              Leave an idea, I love to read them :)
+            </a>
+          `;
         }
-        if (surveyTag) {
-          surveyTag.textContent = "Live Survey";
-          surveyTag.className = `status-badge ${config.cssClass}`;
-        }
-      } else {
-        // Resting state
-        surveyCard.innerHTML = `
-          <div class="survey-strip-left">
-            <span class="status-badge">Closed</span>
-            <h3 style="margin:0; font-size:1.15rem; color:#b2c9a5;">All Echoes Quiet</h3>
-            <span style="font-size:0.95rem; color:#8c826e;">No surveys open right now.</span>
-          </div>
-          <a href="https://infunibuley.github.io/pages/contact" class="sub-link">
-            Leave an idea, I love to read them :)
-          </a>
-        `;
       }
 
-      // 3. POPULATE "RECENT" STREAM FROM REAL-TIME DATA
+      // 3. POPULATE RECENT STREAM
       const streamContainer = document.getElementById("stream-feed-container");
-
-      // Extract raw date for sorting
-      const getItemTimestamp = (item) => {
-        const stageNum = Number(item.stage) || 1;
-        const stageKey = STAGE_CONFIG[stageNum] ? STAGE_CONFIG[stageNum].key : null;
-        const dateStr = (stageKey && item[stageKey]) || item.date;
-        if (!dateStr || dateStr === "TBD" || dateStr === "N/A") return 0;
-        const time = new Date(dateStr).getTime();
-        return isNaN(time) ? 0 : time;
-      };
-
-      // Sort newest first
-      const sortedProjects = [...projects].sort(
-        (a, b) => getItemTimestamp(b) - getItemTimestamp(a)
-      );
 
       const renderStream = (filter = "projects") => {
         if (!streamContainer) return;
@@ -146,7 +143,6 @@ document.addEventListener("DOMContentLoaded", () => {
             };
           });
         } else if (filter === "surveys") {
-          // Strictly only include projects in Stage 3 where the date is not "TBD" and not "N/A"
           displayItems = sortedProjects
             .filter(isValidSurvey)
             .map((item) => ({
@@ -188,7 +184,8 @@ document.addEventListener("DOMContentLoaded", () => {
       renderStream("projects");
 
       // Wire up Filter Pills (Projects and Surveys)
-      const pillButtons = document.querySelectorAll("#recent-filter-pills .tab-btn");      pillButtons.forEach((btn) => {
+      const pillButtons = document.querySelectorAll("#recent-filter-pills .tab-btn");
+      pillButtons.forEach((btn) => {
         btn.addEventListener("click", (e) => {
           e.preventDefault();
           pillButtons.forEach((b) => b.classList.remove("active"));
@@ -205,38 +202,45 @@ const emailInput = document.getElementById('substack-email');
 const btn = document.getElementById('substack-btn');
 const msg = document.getElementById('substack-message');
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  btn.disabled = true;
-  btn.innerText = 'Subscribing...';
-  msg.style.display = 'none';
-
-  try {
-    const response = await fetch('https://infunibuley.substack.com/api/v1/free', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: emailInput.value,
-        first_url: window.location.href,
-        first_referrer: document.referrer
-      }),
-    });
-
-    if (response.ok) {
-      msg.textContent = 'Thanks for subscribing! Check your email to confirm.';
-      msg.style.color = '#7bc676';
-      msg.style.display = 'block';
-      form.reset();
-    } else {
-      throw new Error('Subscription failed');
+if (form) {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (btn) {
+      btn.disabled = true;
+      btn.innerText = 'Subscribing...';
     }
-  } catch (err) {
-    // If Substack blocks the direct API call (CORS or bot check), fallback to direct page
-    window.open(`https://infunibuley.substack.com/subscribe?email=${encodeURIComponent(emailInput.value)}`, '_blank');
-  } finally {
-    btn.disabled = false;
-    btn.innerText = 'Subscribe';
-  }
-});
+    if (msg) msg.style.display = 'none';
+
+    try {
+      const response = await fetch('https://infunibuley.substack.com/api/v1/free', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: emailInput.value,
+          first_url: window.location.href,
+          first_referrer: document.referrer
+        }),
+      });
+
+      if (response.ok) {
+        if (msg) {
+          msg.textContent = 'Thanks for subscribing! Check your email to confirm.';
+          msg.style.color = '#7bc676';
+          msg.style.display = 'block';
+        }
+        form.reset();
+      } else {
+        throw new Error('Subscription failed');
+      }
+    } catch (err) {
+      window.open(`https://infunibuley.substack.com/subscribe?email=${encodeURIComponent(emailInput.value)}`, '_blank');
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.innerText = 'Subscribe';
+      }
+    }
+  });
+}

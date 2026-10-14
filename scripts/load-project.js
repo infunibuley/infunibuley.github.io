@@ -122,13 +122,21 @@ function parseAndPopulateMarkdown(markdown, projectId, project) {
 
     let parsedHtml = "";
     if (rawContent && rawContent.toUpperCase() !== "N/A") {
-      parsedHtml = typeof marked !== "undefined" ? marked.parse(rawContent) : `<p>${rawContent}</p>`;
+      if (typeof marked !== "undefined") {
+        parsedHtml = marked.parse(rawContent);
+      } else {
+        // Fallback: split by double newlines (or single newlines) and wrap each in <p>
+        parsedHtml = rawContent
+          .split(/\n\s*\n/)
+          .map(para => `<p>${para.trim()}</p>`)
+          .join("");
+      }
     } else if (i !== 3 && i !== 4) {
       parsedHtml = "<p>No notes written for this stage yet.</p>";
     }
-
+    
     // Stage 4: Inject Jupyter Notebook View Link
-    if (i === 4) {
+    if (i >= 4) {
       const notebookGithubUrl = `${GITHUB_BASE}/data/projects/${projectId}/${projectId}.ipynb`;
       const notebookCallout = `
         <div class="notebook-action-card" style="margin-bottom: 20px; padding: 14px 18px; border: 1px dashed #3b3329; border-radius: 6px; background-color: rgba(0, 0, 0, 0.15);">
